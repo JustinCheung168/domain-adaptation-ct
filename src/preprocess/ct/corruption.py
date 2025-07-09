@@ -65,6 +65,6 @@ class SinogramCorruptor:
 
     corrupted_sinogram = sinogram.copy()
     for i in range(len(views)):
-      corrupted_sinogram[views[i], :] = corrupted_sinogram[views[i], :] * factors[i]
+      corrupted_sinogram[:, views[i]] = corrupted_sinogram[:, views[i]] * factors[i]
 
     return corrupted_sinogram
