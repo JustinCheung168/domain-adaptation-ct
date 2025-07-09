@@ -50,14 +50,21 @@ class ImShowGray:
   @staticmethod
   def imshow_diff(img_new: np.ndarray, img_old: np.ndarray, 
                   window: Optional[Tuple[float, float]] = None,
+                  titles: Optional[Tuple[str, str]] = None,
                   title_stats: bool = False):
-    """Display the difference between two images for comparative purposes."""
+    """
+    Display the difference between two images for comparative purposes.
+    The difference taken is img_new minus img_old.
+    """
+    if titles is None:
+      titles = ("New", "Old")
+
     img_diff = img_new - img_old
     img_absdiff = np.abs(img_diff)
 
     fig, axes = plt.subplots(1, 4, figsize=(12, 6))
 
-    ImShowGray.imshow(img_new, axes[0], title=f"New", title_stats=title_stats, window=window)
-    ImShowGray.imshow(img_old, axes[1], title=f"Old", title_stats=title_stats, window=window)
-    ImShowGray.imshow(img_diff, axes[2], title=f"New - Old", title_stats=title_stats, window=window)
-    ImShowGray.imshow(img_absdiff, axes[3], title=f"|New - Old|", title_stats=title_stats, window=window)
+    ImShowGray.imshow(img_new, axes[0], title=titles[0], title_stats=title_stats, window=window)
+    ImShowGray.imshow(img_old, axes[1], title=titles[1], title_stats=title_stats, window=window)
+    ImShowGray.imshow(img_diff, axes[2], title=f"{titles[0]} - {titles[1]}", title_stats=title_stats, window=window)
+    ImShowGray.imshow(img_absdiff, axes[3], title=f"|{titles[0]} - {titles[1]}|", title_stats=title_stats, window=window)
