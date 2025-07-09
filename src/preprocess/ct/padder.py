@@ -4,6 +4,7 @@ from typing import Tuple
 import numpy as np
 
 class Padder:
+  """2D image padder"""
   def __init__(self, pad_sz = int):
     self.pad_sz = pad_sz
 

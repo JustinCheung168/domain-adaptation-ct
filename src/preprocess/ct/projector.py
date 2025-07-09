@@ -65,8 +65,6 @@ class Projector:
 
     sinogram = np.zeros((self.n_angles, self.n_detectors))
 
-    dl = 1.0 / img.shape[1]
-
     for i_angle in tqdm(range(self.n_angles), desc="Forward Projection"):
       # Rotate the image CCW by the i-th angle.
       angle_deg = self.angles_deg[i_angle]
@@ -75,14 +73,14 @@ class Projector:
       # Project across rows.
       # Each summation approximates integration along the X-ray beam's path
       # with step size dl.
-      proj = np.sum(img_rotated, axis=1) * dl
+      proj = np.sum(img_rotated, axis=1)
 
       # Save projection as a row of the sinogram.
       sinogram[i_angle, :] = proj
 
     return sinogram
 
-  def filtered_backprojection(self, sinogram: np.ndarray):
+  def filtered_backproject(self, sinogram: np.ndarray):
     """
     Reconstruct the image from the `sinogram`.
 
@@ -119,9 +117,9 @@ class Projector:
     # covering domain [-1/2 ... 1/2)
     f = fftshift(fftfreq(n))
 
-    if kernel_type == KernelType.RAMP:
+    if kernel_type.value == KernelType.RAMP.value:
       kernel = np.abs(f)
-    elif kernel_type == KernelType.HANN_RAMP:
+    elif kernel_type.value == KernelType.HANN_RAMP.value:
       kernel = np.abs(f)
 
       # Apodize the ramp using a Hann window.
@@ -183,8 +181,8 @@ class Projector:
     img_recon = np.zeros((self.n_detectors, self.recon_width))
 
     # Assume that the spacing between angles remains constant.
-    d_angle = np.deg2rad(np.mean(np.diff(self.angles_deg)))
-    dl = 1.0 / self.recon_width
+    # d_angle = np.deg2rad(np.mean(np.diff(self.angles_deg)))
+    d_angle = 1.0
 
     for i_angle in tqdm(range(self.n_angles), desc="Backprojection"):
 
@@ -199,7 +197,7 @@ class Projector:
       backproj_unrotated = rotate(backproj, -angle_deg, reshape=False)
 
       # Add this backprojection as a contribution to the final image.
-      img_recon = img_recon + backproj_unrotated * d_angle * dl
+      img_recon = img_recon + backproj_unrotated * d_angle
 
     # FFT during any filtering transforms data to complex values.
     # Assume negligible imaginary component and return real component.
