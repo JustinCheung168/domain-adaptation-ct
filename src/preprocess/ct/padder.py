@@ -5,7 +5,7 @@ import numpy as np
 
 class Padder:
   """2D image padder"""
-  def __init__(self, pad_sz = int):
+  def __init__(self, pad_sz = Tuple[Tuple[int, int], Tuple[int, int]]):
     self.pad_sz = pad_sz
 
   def pad(self, arr: np.ndarray):
@@ -23,3 +23,8 @@ class Padder:
     max_dimension = max(shape)
     diagonal = np.sqrt(2) * max_dimension
     return int(np.ceil((diagonal - max_dimension) / 2))
+
+class SymmetricPadder(Padder):
+  """2D image padder"""
+  def __init__(self, pad_sz = int):
+    super().__init__(((pad_sz, pad_sz), (pad)))
