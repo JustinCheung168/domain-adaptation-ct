@@ -124,6 +124,10 @@ def train_model(train_dataset, eval_dataset, model, output_dir="./results", num_
         logging_dir='./logs',
         logging_steps=10,
         load_best_model_at_end=True,
+        learning_rate=0.1,
+        weight_decay=1e-4,
+        seed=42,
+        optim="sgd"
     )
 
     trainer = Trainer(
