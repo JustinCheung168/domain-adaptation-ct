@@ -278,3 +278,12 @@ def make_metrics_fn(model):
             "lambda": model.grad_reverse.alpha if hasattr(model, 'grad_reverse') else None
         }
     return compute_metrics
+
+def dataset_load(file_path):
+
+    data = np.load(file_path, allow_pickle=True)
+    images = data['images']
+    labels1 = data['labels1']
+    labels2 = data['labels2']
+
+    return CustomImageDataset(images, labels1, labels2)
