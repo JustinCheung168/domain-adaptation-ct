@@ -1,0 +1,3 @@
+[submodule "GradientReversal"]
+	path = GradientReversal
+	url = https://github.com/tadeephuy/GradientReversal.git

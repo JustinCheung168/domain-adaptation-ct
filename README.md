@@ -1,5 +1,52 @@
 # domain-generalization-ct
 
+## Usage
+
+### Setting up Docker
+
+This project uses Docker to control requirements and aid in cross-platform compatibility.
+
+#### Prerequisites
+
+1. **Install Docker:**
+   - For Linux: Follow the instructions at https://docs.docker.com/engine/install/.
+   - For Mac & Windows: Download Docker Desktop from https://www.docker.com/products/docker-desktop/.
+
+2. **Windows Only - Install Git Bash:**
+   - Download and install Git Bash from https://git-scm.com/downloads.
+
+#### Building the Docker Image (one-time setup)
+
+1. Open a terminal (if you are using Windows, this terminal should be a Git Bash terminal).
+2. Navigate to the project directory:
+   ```bash
+   cd /path/to/domain-generalization-ct
+   ```
+3. Run the `build.sh` script to build the Docker image:
+   ```bash
+   ./docker/build.sh
+   ```
+
+#### Setting your data path
+
+Open `./docker/config.env` and set the path to where your data will live.
+
+For example, on a Windows system:
+``
+
+#### Running the Project
+
+1. Start the Docker container by running the `run.sh` script:
+   ```bash
+   ./docker/run.sh
+   ```
+
+### Troubleshooting
+
+- **Docker not running:** Ensure Docker Desktop is running on your system.
+- **Permission issues:** If you encounter permission errors, try running the scripts with `sudo` (Linux/Mac) or ensure your user is added to the `docker` group.
+- **Incorrect `DATA_PATH`:** Verify that the `DATA_PATH` in `docker/config.env` points to the correct directory.
+
 ## Contents
 
 - `geirhos/`: Preprocessing & training code for reproducing results from Geirhos et al. (2018).
@@ -19,4 +66,6 @@
 - Ganin, Y., & Lempitsky, V. (2015, June). Unsupervised domain adaptation by backpropagation. In International conference on machine learning (pp. 1180-1189). PMLR.
 - Geirhos, R., Temme, C. R., Rauber, J., Schütt, H. H., Bethge, M., & Wichmann, F. A. (2018). Generalisation in humans and deep neural networks. Advances in neural information processing systems, 31.
 
+## TODO
 
+Check docker process for various platforms
