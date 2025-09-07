@@ -58,7 +58,7 @@ fi
 #   to override the default CMD behavior specified in the Dockerfile.
 echo "Starting a new container named '${CONTAINER_NAME}'..."
 reminder_message
-docker run \
+MSYS_NO_PATHCONV=1 docker run \
     -it \
     --rm \
     --name "${CONTAINER_NAME}" \
