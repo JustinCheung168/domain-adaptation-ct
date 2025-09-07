@@ -31,6 +31,24 @@ echo "DATA_PATH=${DATA_PATH}"
 # Give the container a unique name
 CONTAINER_NAME="dagict-container"
 
+# You can use `run.sh --cpu` to run with CPU-only.
+# Our code is designed with GPU availability expected, though, so this will only give limited functionality.
+GPU_FLAG=""
+if [[ "${1:-}" == "--cpu" ]]; then
+    # Remove --cpu from arguments
+    shift  
+else
+    # Default behavior is to try to use GPU.
+    if command -v nvidia-smi &>/dev/null; then
+        GPU_FLAG="--gpus all"
+    else
+        echo "Error: Failed to run nvidia-smi, so cannot expose GPUs to container."
+        echo "Make sure you have appropriate NVIDIA drivers for your computer installed."
+        echo "You can rerun this script with '--cpu' as the first argument to use only CPU."
+        exit 1
+    fi
+fi
+
 # Reminder message about what gets deleted when the container is removed
 reminder_message() {
     echo "REMINDER: Once you close the container '${CONTAINER_NAME}', the following will be lost:"
@@ -62,7 +80,7 @@ MSYS_NO_PATHCONV=1 docker run \
     -it \
     --rm \
     --name "${CONTAINER_NAME}" \
-    --gpus all \
+    $GPU_FLAG \
     -v "${REPO_PATH}":"/repo/" \
     -v "${DATA_PATH}":"/data/" \
     -w "/repo/" \
