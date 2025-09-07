@@ -17,6 +17,7 @@ This project uses Docker to control requirements and aid in cross-platform compa
 #### Building the Docker Image (one-time setup)
 
 1. Open a terminal (if you are using Windows, this terminal should be a Git Bash terminal).
+1. Open the Docker application. Do any first-time setup it prompts for.
 1. Clone this repository.
 1. Navigate to the project directory:
    ```bash
