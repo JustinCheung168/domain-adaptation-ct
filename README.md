@@ -11,18 +11,18 @@ This project uses Docker to control requirements and aid in cross-platform compa
 1. **Install Docker:**
    - For Linux: Follow the instructions at https://docs.docker.com/engine/install/.
    - For Mac & Windows: Download Docker Desktop from https://www.docker.com/products/docker-desktop/.
-
-2. **Windows Only - Install Git Bash:**
+1. **Windows Only - Install Git Bash:**
    - Download and install Git Bash from https://git-scm.com/downloads.
 
 #### Building the Docker Image (one-time setup)
 
 1. Open a terminal (if you are using Windows, this terminal should be a Git Bash terminal).
-2. Navigate to the project directory:
+1. Clone this repository.
+1. Navigate to the project directory:
    ```bash
-   cd /path/to/domain-generalization-ct
+   cd ./domain-generalization-ct
    ```
-3. Run the `build.sh` script to build the Docker image:
+1. Run the `build.sh` script to build the Docker image:
    ```bash
    ./docker/build.sh
    ```
@@ -31,9 +31,6 @@ This project uses Docker to control requirements and aid in cross-platform compa
 
 Open `./docker/config.env` and set the path to where your data will live.
 
-For example, on a Windows system:
-``
-
 #### Running the Project
 
 1. Start the Docker container by running the `run.sh` script:
@@ -41,11 +38,16 @@ For example, on a Windows system:
    ./docker/run.sh
    ```
 
-### Troubleshooting
+The default behavior of this script is to open Jupyter Lab. When the Jupyter Lab server comes up, you can start running code and editing in the Jupyter Lab environment by going to `localhost:8888/lab` in your browser.
 
-- **Docker not running:** Ensure Docker Desktop is running on your system.
-- **Permission issues:** If you encounter permission errors, try running the scripts with `sudo` (Linux/Mac) or ensure your user is added to the `docker` group.
-- **Incorrect `DATA_PATH`:** Verify that the `DATA_PATH` in `docker/config.env` points to the correct directory.
+
+Alternatively, you can open an interactive Bash session instead of Jupyter Lab via:
+
+```bash
+./docker/run.sh bash
+```
+
+You can consider attaching a VSCode session to the resulting container.
 
 ## Contents
 
