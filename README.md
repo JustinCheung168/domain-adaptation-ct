@@ -1,5 +1,54 @@
 # domain-generalization-ct
 
+## Usage
+
+### Setting up Docker
+
+This project uses Docker to control requirements and aid in cross-platform compatibility.
+
+#### Prerequisites
+
+1. **Install Docker:**
+   - For Linux: Follow the instructions at https://docs.docker.com/engine/install/.
+   - For Mac & Windows: Download Docker Desktop from https://www.docker.com/products/docker-desktop/.
+1. **Windows Only - Install Git Bash:**
+   - Download and install Git Bash from https://git-scm.com/downloads.
+
+#### Building the Docker Image (one-time setup)
+
+1. Open a terminal (if you are using Windows, this terminal should be a Git Bash terminal).
+1. Clone this repository.
+1. Navigate to the project directory:
+   ```bash
+   cd ./domain-generalization-ct
+   ```
+1. Run the `build.sh` script to build the Docker image:
+   ```bash
+   ./docker/build.sh
+   ```
+
+#### Setting your data path
+
+Open `./docker/config.env` and set the path to where your data will live.
+
+#### Running the Project
+
+1. Start the Docker container by running the `run.sh` script:
+   ```bash
+   ./docker/run.sh
+   ```
+
+The default behavior of this script is to open Jupyter Lab. When the Jupyter Lab server comes up, you can start running code and editing in the Jupyter Lab environment by going to `localhost:8888/lab` in your browser.
+
+
+Alternatively, you can open an interactive Bash session instead of Jupyter Lab via:
+
+```bash
+./docker/run.sh bash
+```
+
+You can consider attaching a VSCode session to the resulting container.
+
 ## Contents
 
 - `geirhos/`: Preprocessing & training code for reproducing results from Geirhos et al. (2018).
@@ -19,4 +68,6 @@
 - Ganin, Y., & Lempitsky, V. (2015, June). Unsupervised domain adaptation by backpropagation. In International conference on machine learning (pp. 1180-1189). PMLR.
 - Geirhos, R., Temme, C. R., Rauber, J., Schütt, H. H., Bethge, M., & Wichmann, F. A. (2018). Generalisation in humans and deep neural networks. Advances in neural information processing systems, 31.
 
+## TODO
 
+Check docker process for various platforms
