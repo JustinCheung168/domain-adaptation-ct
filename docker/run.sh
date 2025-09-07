@@ -75,6 +75,8 @@ fi
 # "$@" : If you give this script more arguments, then they'll get passed directly to `docker run`
 #   to override the default CMD behavior specified in the Dockerfile.
 echo "Starting a new container named '${CONTAINER_NAME}'..."
+echo "Your laptop's ${REPO_PATH} will be available in the container at /repo/"
+echo "Your laptop's ${DATA_PATH} will be available in the container at /data/"
 reminder_message
 MSYS_NO_PATHCONV=1 docker run \
     -it \
