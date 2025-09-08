@@ -50,6 +50,22 @@ Alternatively, you can open an interactive Bash session instead of Jupyter Lab v
 
 You can consider attaching a VSCode session to the resulting container.
 
+#### Troubleshooting
+
+In one Windows system, we observed a failure in the `docker/run.sh` script that is potentially resolved by replacing the final docker run command with the following:
+```bash
+MSYS_NO_PATHCONV=1 winpty docker run \
+    -it \
+    --rm \
+    --name "${CONTAINER_NAME}" \
+    $GPU_FLAG \
+    -v "C:\Users\myname\domain-generalization-ct":"/repo/" \
+    -v "C:\Users\myname\domain-generalization-ct":"/data/" \
+    -p 8888:8888 \
+    dagict-image \
+    "$@"
+```
+
 ## Contents
 
 - `geirhos/`: Preprocessing & training code for reproducing results from Geirhos et al. (2018).

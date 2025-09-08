@@ -11,6 +11,7 @@ COPY requirements/linux-requirements.txt requirements/python-environment.yml ./
 # Remove apt's cached package lists at the end to reduce final image size.
 RUN sed -i 's|http://|https://|g' /etc/apt/sources.list && \
     apt-get update && \
+    sed -i 's/\r$//' linux-requirements.txt && \
     xargs -a linux-requirements.txt apt-get install -y && \
     rm -rf /var/lib/apt/lists/*
 
