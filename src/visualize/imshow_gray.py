@@ -38,7 +38,7 @@ class ImShowGray:
       title += "\n" + ImShowGray.stat_string(img)
     if title_window:
       title += "\n" + f"Window: [{window[0]:.2f}, {window[1]:.2f}]"
-    axes.set_title(title)
+    axes.set_title(title,fontsize=19)
 
 
     axes.imshow(img, cmap='gray', vmin=window[0], vmax=window[1])
@@ -63,6 +63,7 @@ class ImShowGray:
     titles: Optional[Tuple[str, str]] = None,
     title_stats: bool = False,
     title_window: bool = False,
+    include_abs_diff: bool = True,
   ) -> Tuple[plt.Figure, List[plt.Axes]]:
     """
     Display the difference between two images for comparative purposes.
@@ -78,11 +79,17 @@ class ImShowGray:
     img_diff = img_new - img_old
     img_absdiff = np.abs(img_diff)
 
-    fig, axes = plt.subplots(1, 4, figsize=(12, 6))
+    n_subplots = 3
+    if include_abs_diff:
+        n_subplots = 4
+    fig, axes = plt.subplots(1, n_subplots, figsize=(12, 6))
 
     ImShowGray.imshow(img_new, axes[0], title=titles[0], title_stats=title_stats, title_window=title_window, window=window)
     ImShowGray.imshow(img_old, axes[1], title=titles[1], title_stats=title_stats, title_window=title_window, window=window)
-    ImShowGray.imshow(img_diff, axes[2], title=f"{titles[0]} - {titles[1]}", title_stats=title_stats, title_window=title_window, window=diff_window)
-    ImShowGray.imshow(img_absdiff, axes[3], title=f"|{titles[0]} - {titles[1]}|", title_stats=title_stats, title_window=title_window, window=diff_window)
+    diff_title=f"{titles[0]} - {titles[1]}"
+    diff_title=f"Difference"
+    ImShowGray.imshow(img_diff, axes[2], title=diff_title, title_stats=title_stats, title_window=title_window, window=diff_window)
+    if include_abs_diff:
+        ImShowGray.imshow(img_absdiff, axes[3], title=f"|{titles[0]} - {titles[1]}|", title_stats=title_stats, title_window=title_window, window=diff_window)
 
     return fig, axes
