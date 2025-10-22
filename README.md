@@ -87,4 +87,6 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 
 ## TODO
 
-Check docker process for various platforms
+Restore the image manipulation notebooks.
+Restore the OrganAMNIST preprocessing code.
+Update this documentation.
