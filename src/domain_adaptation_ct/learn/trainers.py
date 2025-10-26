@@ -1,7 +1,10 @@
-from typing import Type
+import datetime
+import os
+from typing import Type, Optional, Callable
 
 from domain_adaptation_ct.learn.architectures import ResNet50Baseline, ResNet50DANN
 from domain_adaptation_ct.learn.metrics import make_metrics_fn
+from domain_adaptation_ct.learn.lambda_schedules import LambdaUpdateCallback
 
 from transformers import Trainer, TrainingArguments
 import torch
@@ -42,37 +45,63 @@ class DANNTrainer(Trainer):
 
 def train_model(
     trainer_cls: Type[Trainer],
+    model: torch.nn.Module,
     train_dataset: torch.utils.data.Dataset,
     eval_dataset: torch.utils.data.Dataset,
-    model: torch.nn.Module,
+    fold_index: int,
     output_dir: str,
-    num_epochs: int,
+    num_train_epochs: int,
     batch_size: int,
+    learning_rate: float,
+    weight_decay: float,
+    optim: str,
+    resume_from_checkpoint: bool,
+    lambda_scheduler: Optional[Callable[[int, int], float]] = None,
 ):
-    """Wrapper for using one of the above trainers."""
+    """
+    Wrapper for using one of the above trainers.
+    """
+
+    scheduler_name = lambda_scheduler.__name__
+    date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    output_dir_results = os.path.join(output_dir, f"{scheduler_name}_fold_{fold_index}_results_{date_str}")
+    model_save_path = os.path.join(output_dir, f"{scheduler_name}_fold_{fold_index}_final_model_{date_str}")
+
     training_args = TrainingArguments(
-        output_dir=output_dir,
-        learning_rate=0.1,
+        output_dir=output_dir_results,
+        learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
-        num_train_epochs=num_epochs,
-        weight_decay=1e-4,
+        num_train_epochs=num_train_epochs,
+        weight_decay=weight_decay,
         eval_strategy="epoch",
         save_strategy="epoch",
         logging_strategy="epoch",
         seed=42,
-        optim="sgd"
+        optim=optim,
     )
+
+    callbacks = []
+
+    if lambda_scheduler is None:
+        assert not hasattr(model, "grad_reverse"), "Do not specify a lambda scheduler if there is no `grad_reverse` layer."
+        callbacks.append(LambdaUpdateCallback(model, lambda_scheduler, num_epochs))
+    else:
+        assert hasattr(model, "grad_reverse"), "Must specify a lambda scheduler with the `grad_reverse` layer."
 
     trainer = trainer_cls(
         model=model,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
-        compute_metrics=make_metrics_fn(model)
+        compute_metrics=make_metrics_fn(model),
+        callbacks=callbacks,
     )
 
-    trainer.train(resume_from_checkpoint=True)
+    trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+
+    trainer.save_model(model_save_path)
+
     return trainer
 
 def evaluate_model(

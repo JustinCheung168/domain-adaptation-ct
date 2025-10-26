@@ -1,3 +1,5 @@
+from typing import Optional
+
 from dataclasses import dataclass
 import torch
 from transformers import PreTrainedModel, ResNetConfig
@@ -8,9 +10,12 @@ from domain_adaptation_ct.learn.gradient_reversal import GradientReversal
 from domain_adaptation_ct.learn.loss import MaskedDomainAdversarialLoss
 
 @dataclass
-class SingleOutput(ModelOutput):
+class BranchedOutput(ModelOutput):
     """Defines the model output structure"""
-    branch1_logits: torch.FloatTensor
+    loss: Optional[torch.FloatTensor]
+    branch1_logits: Optional[torch.FloatTensor]
+    branch2_logits: Optional[torch.FloatTensor]
+    features: Optional[torch.FloatTensor]
 
 class ResNet50Baseline(PreTrainedModel):
     """
@@ -42,20 +47,22 @@ class ResNet50Baseline(PreTrainedModel):
             # Children of this class should not call this post_init.
             self.post_init()
 
-    def forward(self, pixel_values: torch.Tensor) -> SingleOutput:
+    def forward(self, pixel_values: torch.Tensor, labels1: Optional[torch.Tensor] = None) -> BranchedOutput:
         features = self.resnet(pixel_values).pooler_output
         features = self.pre_branch(features)
 
         logits = self.branch1(features)
 
-        # Loss to be calculated outside of forward call.
+        loss = None
+        if labels1 is not None:
+            loss = self.loss_fn(logits, labels1)
 
-        return SingleOutput(branch1_logits=logits)
-
-@dataclass
-class BranchedOutput(SingleOutput):
-    """Defines the model output structure"""
-    branch2_logits: torch.FloatTensor
+        return BranchedOutput(
+            loss = loss,
+            branch1_logits = logits,
+            branch2_logits = None,
+            features = features,
+        )
 
 class ResNet50DANN(ResNet50Baseline):
     """
@@ -85,7 +92,7 @@ class ResNet50DANN(ResNet50Baseline):
 
         self.post_init()
 
-    def forward(self, pixel_values) -> BranchedOutput:
+    def forward(self, pixel_values, labels1: Optional[torch.Tensor] = None, labels2: Optional[torch.Tensor] = None) -> BranchedOutput:
         # Feature extractor G_f
         features = self.resnet(pixel_values).pooler_output
         features = self.pre_branch(features)
@@ -97,8 +104,13 @@ class ResNet50DANN(ResNet50Baseline):
         # Domain classifier G_d (branch for domain labels)
         logits2 = self.branch2(features)
 
-        # Loss to be calculated outside of forward call.
+        loss = None
+        if (labels1 is not None) and (labels2 is not None):
+            loss = self.loss_fn(logits1, logits2, labels1, labels2)
 
-        return BranchedOutput(branch1_logits=logits1, branch2_logits=logits2)
-
-
+        return BranchedOutput(
+            loss = loss,
+            branch1_logits = logits1,
+            branch2_logits = logits2,
+            features = features,
+        )

@@ -13,7 +13,7 @@ class LambdaUpdateCallback(TrainerCallback):
             raise Exception("Could not find `grad_reverse` in model. Lambda hyperparameter is not meaningful without `grad_reverse`.")
         self.model.grad_reverse.lamb = float(new_lambda)
 
-def logistic_increasing_lambda_scheduler(epoch: int, total_epochs: int):
+def logistic_increasing_lambda_scheduler(epoch: int, total_epochs: int) -> float:
     """
     Based on Ganin, Y., & Lempitsky, V. (2015, June). Unsupervised domain adaptation by backpropagation.
     """
@@ -21,22 +21,22 @@ def logistic_increasing_lambda_scheduler(epoch: int, total_epochs: int):
     lambda_p = 2. / (1. + np.exp(-10 * progress)) - 1
     return float(lambda_p)
 
-def linear_increasing_lambda_scheduler(epoch: int, total_epochs: int):
+def linear_increasing_lambda_scheduler(epoch: int, total_epochs: int) -> float:
     return epoch / total_epochs
 
-def linear_decreasing_lambda_scheduler(epoch: int, total_epochs: int):
+def linear_decreasing_lambda_scheduler(epoch: int, total_epochs: int) -> float:
     return 1 - (epoch / total_epochs)
 
-def constant_lambda_scheduler(epoch: int, total_epochs: int):
+def constant_lambda_scheduler(epoch: int, total_epochs: int) -> float:
     return 0.5
 
-def parabolic_increasing_lambda_scheduler(epoch: int, total_epochs: int):
+def parabolic_increasing_lambda_scheduler(epoch: int, total_epochs: int) -> float:
     START_VALUE=0.0
     END_VALUE=1.0
     progress = epoch / total_epochs
     return START_VALUE + (END_VALUE - START_VALUE) * (progress ** 2)
 
-def parabolic_decreasing_lambda_scheduler(epoch: int, total_epochs: int):
+def parabolic_decreasing_lambda_scheduler(epoch: int, total_epochs: int) -> float:
     START_VALUE=0.0
     END_VALUE=1.0
     progress = epoch / total_epochs
