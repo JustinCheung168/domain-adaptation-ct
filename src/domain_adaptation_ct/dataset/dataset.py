@@ -1,5 +1,3 @@
-from typing import Dict
-
 import numpy as np
 import torch
 from torchvision import transforms
@@ -17,7 +15,7 @@ class OneLabelDataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.images)
 
-    def __getitem__(self, idx: int) -> Dict[str, np.ndarray]:
+    def __getitem__(self, idx: int) -> dict[str, np.ndarray]:
         img = self.images[idx]
         label1 = int(self.labels1[idx])
 
@@ -29,6 +27,14 @@ class OneLabelDataset(torch.utils.data.Dataset):
             "labels1": label1,
         }
 
+    @staticmethod
+    def load(file_path: str):
+        data = np.load(file_path, allow_pickle=True)
+        images = data['images']
+        labels1 = data['labels1']
+
+        return OneLabelDataset(images, labels1)
+
 class TwoLabelDataset(OneLabelDataset):
     def __init__(self, images, labels1, labels2):
         super().__init__(images, labels1)
@@ -39,18 +45,13 @@ class TwoLabelDataset(OneLabelDataset):
         label2 = int(self.labels2[idx])
         sample["labels2"] = label2
         return sample
+    
+    @staticmethod
+    def load(file_path: str):
+        data = np.load(file_path, allow_pickle=True)
+        images = data['images']
+        labels1 = data['labels1']
+        labels2 = data['labels2']
 
-def one_label_dataset_load(file_path):
-    data = np.load(file_path, allow_pickle=True)
-    images = data['images']
-    labels1 = data['labels1']
+        return TwoLabelDataset(images, labels1, labels2)
 
-    return OneLabelDataset(images, labels1)
-
-def two_label_dataset_load(file_path):
-    data = np.load(file_path, allow_pickle=True)
-    images = data['images']
-    labels1 = data['labels1']
-    labels2 = data['labels2']
-
-    return TwoLabelDataset(images, labels1, labels2)

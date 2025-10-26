@@ -5,7 +5,7 @@ from transformers.modeling_outputs import ModelOutput
 from transformers.models.resnet.modeling_resnet import ResNetForImageClassification
 
 from domain_adaptation_ct.learn.gradient_reversal import GradientReversal
-from domain_adaptation_ct.learn.loss import ?
+from domain_adaptation_ct.learn.loss import MaskedDomainAdversarialLoss
 
 @dataclass
 class SingleOutput(ModelOutput):
@@ -48,6 +48,8 @@ class ResNet50Baseline(PreTrainedModel):
 
         logits = self.branch1(features)
 
+        # Loss to be calculated outside of forward call.
+
         return SingleOutput(branch1_logits=logits)
 
 @dataclass
@@ -69,7 +71,7 @@ class ResNet50DANN(ResNet50Baseline):
         # Inherit from ResNet50Baseline
         super().__init__(config, num_classes)
 
-        self.grad_reverse = GradientReversal(alpha=lamb)
+        self.grad_reverse = GradientReversal(lamb=lamb)
 
         self.domain_classifier = torch.nn.Linear(512, 1)
         
@@ -78,8 +80,8 @@ class ResNet50DANN(ResNet50Baseline):
             self.domain_classifier,
         )
 
-        # Loss function used only by trainer
-        self.loss_fn = 
+        # Loss function used only by trainer.
+        self.loss_fn = MaskedDomainAdversarialLoss()
 
         self.post_init()
 
@@ -94,6 +96,8 @@ class ResNet50DANN(ResNet50Baseline):
         # Gradient reversal layer R_lambda and
         # Domain classifier G_d (branch for domain labels)
         logits2 = self.branch2(features)
+
+        # Loss to be calculated outside of forward call.
 
         return BranchedOutput(branch1_logits=logits1, branch2_logits=logits2)
 

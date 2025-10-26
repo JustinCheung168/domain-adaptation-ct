@@ -26,7 +26,7 @@ def make_metrics_fn(model):
             "precision_branch2": precision_score(labels2, preds2, average="macro", zero_division=0),
             "recall_branch2": recall_score(labels2, preds2, average="macro", zero_division=0),
             "f1_branch2": f1_score(labels2, preds2, average="macro", zero_division=0),
-            "lambda": model.grad_reverse.alpha if hasattr(model, 'grad_reverse') else None
+            "lambda": model.grad_reverse.lamb if hasattr(model, 'grad_reverse') else None
         }
     return compute_metrics
 

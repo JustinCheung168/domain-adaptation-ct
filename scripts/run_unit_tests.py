@@ -61,25 +61,25 @@ def unit_test_gradient_reversal():
     torch.manual_seed(0)
     N = 10
     K = 5
-    alpha = 0.7
+    lamb = 0.7
     f = torch.randn(N, K, requires_grad=True)
 
     logging.info("Features:\n\t%s", f)
     
-    R_lambda = GradientReversal(alpha)
+    R_lambda = GradientReversal(lamb)
 
     f_after_gradient_reversal = R_lambda(f)
     assert torch.equal(f, f_after_gradient_reversal), "Forward pass should not change input."
 
     # Use the values of the gradient in a scalar to mimic backpropagation.
     # By the linearity of gradient, the gradient of loss with respect to the sum of all elements should equal the sum of the gradients of loss with respect to every element.
-    # Expect gradient of loss with respect to every element in the matrix to have a gradient of negative alpha.
+    # Expect gradient of loss with respect to every element in the matrix to have a gradient of negative lambda.
     mock_loss_value = f_after_gradient_reversal.sum()
     mock_loss_value.backward()
 
     logging.info("Gradient of loss w.r.t. f:\n\t%s", f.grad)
-    expected_grad = -alpha * torch.ones_like(f)
-    assert torch.all(f.grad == expected_grad), "Backward pass should scale gradient by negative alpha."
+    expected_grad = -lamb * torch.ones_like(f)
+    assert torch.all(f.grad == expected_grad), "Backward pass should scale gradient by negative lambda."
 
     print("unit_test_gradient_reversal passed.")
 

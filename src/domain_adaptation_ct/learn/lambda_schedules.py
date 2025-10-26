@@ -11,7 +11,7 @@ class LambdaUpdateCallback(TrainerCallback):
         new_lambda = self.lambda_scheduler(state.epoch, args.num_train_epochs)
         if not hasattr(self.model, "grad_reverse"):
             raise Exception("Could not find `grad_reverse` in model. Lambda hyperparameter is not meaningful without `grad_reverse`.")
-        self.model.grad_reverse.alpha = float(new_lambda)
+        self.model.grad_reverse.lamb = float(new_lambda)
 
 def logistic_increasing_lambda_scheduler(epoch: int, total_epochs: int):
     """
