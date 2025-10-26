@@ -15,9 +15,6 @@ RUN sed -i 's|http://|https://|g' /etc/apt/sources.list && \
     xargs -a linux-requirements.txt apt-get install -y && \
     rm -rf /var/lib/apt/lists/*
 
-# Install useful Python packages.
-RUN conda env update -n base -f python-environment.yml
-
 # By default, running a container based on this image will open JupyterLab.
 # `--ip=0.0.0.0` is needed to let you use the JupyterLab server running the container at localhost.
 # `--allow-root` allows JupyterLab to open if the Docker container is root

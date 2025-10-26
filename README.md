@@ -1,4 +1,4 @@
-# domain-generalization-ct
+# Improving Artifact Robustness for CT Deep Learning Models Without Labeled Artifact Images via Domain Adaptation
 
 ## Usage
 
@@ -11,7 +11,7 @@ This project uses Docker to control requirements and aid in cross-platform compa
 1. **Install Docker:**
    - For Linux: Follow the instructions at https://docs.docker.com/engine/install/.
    - For Mac & Windows: Download Docker Desktop from https://www.docker.com/products/docker-desktop/.
-1. **Windows Only - Install Git Bash:**
+1. **(Windows Only) Install Git Bash:**
    - Download and install Git Bash from https://git-scm.com/downloads.
 
 #### Building the Docker Image (one-time setup)
@@ -21,7 +21,7 @@ This project uses Docker to control requirements and aid in cross-platform compa
 1. Clone this repository.
 1. Navigate to the project directory:
    ```bash
-   cd ./domain-generalization-ct
+   cd ./domain-adaptation-ct
    ```
 1. Run the `build.sh` script to build the Docker image:
    ```bash
@@ -59,10 +59,10 @@ MSYS_NO_PATHCONV=1 winpty docker run \
     --rm \
     --name "${CONTAINER_NAME}" \
     $GPU_FLAG \
-    -v "C:\Users\myname\domain-generalization-ct":"/repo/" \
-    -v "C:\Users\myname\domain-generalization-ct":"/data/" \
+    -v "C:\Users\myname\domain-adaptation-ct":"/repo/" \
+    -v "C:\Users\myname\domain-adaptation-ct":"/data/" \
     -p 8888:8888 \
-    dagict-image \
+    dact-image \
     "$@"
 ```
 

@@ -2,7 +2,7 @@
 
 from transformers import Trainer, TrainingArguments, set_seed
 import datetime
-from src.learn.dann import ResNetForMultiLabel
+from learn.architectures import ResNetForMultiLabel
 
 def run_dann_training_experiment(lambda_scheduler, num_epochs: int, lr: float, optim: str, weight_decay: float, seed: int, output_dir: str, from_checkpoint=None):
     """

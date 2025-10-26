@@ -29,7 +29,7 @@ echo "REPO_PATH=${REPO_PATH}"
 echo "DATA_PATH=${DATA_PATH}"
 
 # Give the container a unique name
-CONTAINER_NAME="dagict-container"
+CONTAINER_NAME="dact-container"
 
 # You can use `run.sh --cpu` to run with CPU-only.
 # Our code is designed with GPU availability expected, though, so this will only give limited functionality.
@@ -87,5 +87,5 @@ MSYS_NO_PATHCONV=1 docker run \
     -v "${DATA_PATH}":"/data/" \
     -w "/repo/" \
     -p 8888:8888 \
-    dagict-image \
+    dact-image \
     "$@"
