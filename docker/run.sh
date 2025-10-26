@@ -54,7 +54,8 @@ reminder_message() {
     echo "REMINDER: Once you close the container '${CONTAINER_NAME}', the following will be lost:"
     echo "  - Any files saved outside the mounted volumes (/repo/ and /data/)."
     echo "  - The container's internal state (such as installed packages)."
-    echo "Make sure to write all data to /data/, and keep record of any new package installations you had to make to aid in reproducibility."
+    echo "Make sure to write all data to /data/."
+    echo "Make sure to update pyproject.toml with any new Python packages you needed to install to aid in reproducibility."
 }
 
 # Case 1 - The container is already running.
