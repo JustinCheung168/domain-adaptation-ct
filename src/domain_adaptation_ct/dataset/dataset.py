@@ -3,7 +3,9 @@ import torch
 from torchvision import transforms
 from typing import Optional
 
-class BaseImageDataset(torch.utils.data.Dataset):
+from domain_adaptation_ct.logging.logging_mixin import LogMixin
+
+class BaseImageDataset(torch.utils.data.Dataset, LogMixin):
     """Base dataset class handling image loading and transforms."""
     
     def __init__(
@@ -35,10 +37,6 @@ class BaseImageDataset(torch.utils.data.Dataset):
 
     def __len__(self) -> int:
         return len(self.images)
-    
-    @staticmethod
-    def load_data(file_path: str) -> dict[str, np.ndarray]:
-        return np.load(file_path, allow_pickle=True)
 
 class OneLabelDataset(BaseImageDataset):
     def __init__(
@@ -61,12 +59,9 @@ class OneLabelDataset(BaseImageDataset):
         }
 
     @classmethod
-    def load(
-        cls, 
-        file_path: str, 
-        convert_grayscale_to_rgb: bool,
-    ) -> 'OneLabelDataset':
-        data = cls.load_data(file_path)
+    def load(cls, file_path: str, convert_grayscale_to_rgb: bool) -> 'OneLabelDataset':
+        """Load from an npz file"""
+        data = np.load(file_path, allow_pickle=True)
         return cls(
             data['images'], 
             data['labels1'],
@@ -97,15 +92,18 @@ class TwoLabelDataset(BaseImageDataset):
         }
 
     @classmethod
-    def load(
-        cls, 
-        file_path: str,
-        convert_grayscale_to_rgb: bool,
-    ) -> 'TwoLabelDataset':
-        data = cls.load_data(file_path)
+    def load(cls, file_path: str, convert_grayscale_to_rgb: bool) -> 'TwoLabelDataset':
+        """Load from an npz file"""
+        # Use mmap_mode='r' to only load images when needed.
+        data = np.load(file_path, allow_pickle=True)
         return cls(
             data['images'],
             data['labels1'],
             data['labels2'],
             convert_grayscale_to_rgb
         )
+    
+DATASET_REGISTRY: dict[str, type[BaseImageDataset]] = {
+    "OneLabelDataset": OneLabelDataset,
+    "TwoLabelDataset": TwoLabelDataset,
+}

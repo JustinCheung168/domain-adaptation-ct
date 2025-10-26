@@ -10,6 +10,10 @@ def make_metrics_fn(model: torch.nn.Module):
         is_branched = isinstance(logits, tuple)
         
         if is_branched:
+            print(logits)
+            print(labels)
+            print(len(logits))
+            print(len(labels))
             logits1, logits2 = logits
             labels1, labels2 = labels
             

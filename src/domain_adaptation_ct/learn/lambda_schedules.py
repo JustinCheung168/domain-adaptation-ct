@@ -41,3 +41,13 @@ def parabolic_decreasing_lambda_scheduler(epoch: int, total_epochs: int) -> floa
     END_VALUE=1.0
     progress = epoch / total_epochs
     return END_VALUE - (END_VALUE - START_VALUE) * (progress ** 2)
+
+# Allow selection of a lambda scheduler by its name as a string.
+LAMBDA_SCHEDULER_REGISTRY = {
+    "logistic_increasing_lambda_scheduler": logistic_increasing_lambda_scheduler,
+    "linear_increasing_lambda_scheduler": linear_increasing_lambda_scheduler,
+    "linear_decreasing_lambda_scheduler": linear_decreasing_lambda_scheduler,
+    "constant_lambda_scheduler": constant_lambda_scheduler,
+    "parabolic_increasing_lambda_scheduler": parabolic_increasing_lambda_scheduler,
+    "parabolic_decreasing_lambda_scheduler": parabolic_decreasing_lambda_scheduler,
+}

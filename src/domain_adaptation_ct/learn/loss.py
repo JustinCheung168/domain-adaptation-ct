@@ -58,7 +58,7 @@ class MaskedDomainAdversarialLoss(torch.nn.Module):
         domain_mask = 1.0 - labels2
 
         loss1 = self.branch1_loss_fn(logits = logits1, labels = labels1, instance_weights = domain_mask)
-        loss2 = self.branch2_loss_fn(input = logits2, target = labels2.float())
+        loss2 = self.branch2_loss_fn(input = logits2, target = labels2.float().view(-1, 1))
 
         total_loss = loss1 + (ld_scale * loss2)
 

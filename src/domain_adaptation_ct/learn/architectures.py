@@ -12,10 +12,10 @@ from domain_adaptation_ct.learn.loss import MaskedDomainAdversarialLoss
 @dataclass
 class BranchedOutput(ModelOutput):
     """Defines the model output structure"""
-    loss: Optional[torch.FloatTensor]
-    branch1_logits: Optional[torch.FloatTensor]
-    branch2_logits: Optional[torch.FloatTensor]
-    features: Optional[torch.FloatTensor]
+    loss: Optional[torch.FloatTensor] = None
+    branch1_logits: Optional[torch.FloatTensor] = None
+    branch2_logits: Optional[torch.FloatTensor] = None
+    features: Optional[torch.FloatTensor] = None
 
 class ResNet50Baseline(PreTrainedModel):
     """
@@ -24,10 +24,11 @@ class ResNet50Baseline(PreTrainedModel):
     """
     config_class = ResNetConfig
 
-    def __init__(self, config, num_classes: int):
+    def __init__(self, num_classes: int):
         """
         num_classes: Number of possible values for output label y.
         """
+        config = ResNet50Baseline.config_class()
         super().__init__(config)
         # ResNet-50
         self.resnet = ResNetForImageClassification(config).resnet
@@ -64,21 +65,26 @@ class ResNet50Baseline(PreTrainedModel):
             features = features,
         )
 
+    @classmethod
+    def load(cls, file_path: str):
+        """In theory should be able to load from checkpoint or safetensors formats"""
+        raise NotImplementedError(":)")
+
 class ResNet50DANN(ResNet50Baseline):
     """
     Defines the DANN (domain adversarial neural network) with a ResNet-50 feature extractor.
     This is a branched model.
     """
 
-    def __init__(self, config, num_classes: int, lamb: float):
+    def __init__(self, num_classes: int, lamb_initial: float, ld_scale: float):
         """
         num_classes: Number of possible values for output label y.
-        lamb: Initial value for lambda hyperparameter for gradient reversal layer.
+        lamb_initial: Initial value for lambda hyperparameter for gradient reversal layer.
         """
         # Inherit from ResNet50Baseline
-        super().__init__(config, num_classes)
+        super().__init__(num_classes)
 
-        self.grad_reverse = GradientReversal(lamb=lamb)
+        self.grad_reverse = GradientReversal(lamb=lamb_initial)
 
         self.domain_classifier = torch.nn.Linear(512, 1)
         
@@ -89,6 +95,8 @@ class ResNet50DANN(ResNet50Baseline):
 
         # Loss function used only by trainer.
         self.loss_fn = MaskedDomainAdversarialLoss()
+
+        self.ld_scale = ld_scale
 
         self.post_init()
 
@@ -106,7 +114,7 @@ class ResNet50DANN(ResNet50Baseline):
 
         loss = None
         if (labels1 is not None) and (labels2 is not None):
-            loss = self.loss_fn(logits1, logits2, labels1, labels2)
+            loss = self.loss_fn(logits1, logits2, labels1, labels2, self.ld_scale)
 
         return BranchedOutput(
             loss = loss,
@@ -114,3 +122,9 @@ class ResNet50DANN(ResNet50Baseline):
             branch2_logits = logits2,
             features = features,
         )
+
+
+ARCHITECTURE_REGISTRY: dict[str, type[torch.nn.Module]] = {
+    "ResNet50Baseline": ResNet50Baseline,
+    "ResNet50DANN": ResNet50DANN,
+}
