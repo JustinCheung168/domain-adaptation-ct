@@ -4,8 +4,8 @@ from transformers import PreTrainedModel, ResNetConfig
 from transformers.modeling_outputs import ModelOutput
 from transformers.models.resnet.modeling_resnet import ResNetForImageClassification
 
-from src.learn.gradient_reversal import GradientReversal
-from src.learn.loss import ?
+from domain_adaptation_ct.learn.gradient_reversal import GradientReversal
+from domain_adaptation_ct.learn.loss import ?
 
 @dataclass
 class SingleOutput(ModelOutput):

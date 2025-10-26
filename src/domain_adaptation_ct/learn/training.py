@@ -2,8 +2,8 @@ from transformers import TrainerCallback, Trainer, TrainingArguments, PreTrained
 import torch
 import torch.nn as nn
 
-from src.learn.architectures import ResNet50Baseline, ResNet50DANN
-from src.learn.loss import MaskedDomainAdversarialLoss
+from domain_adaptation_ct.learn.architectures import ResNet50Baseline, ResNet50DANN
+from domain_adaptation_ct.learn.loss import MaskedDomainAdversarialLoss
 
 class BaselineTrainer(Trainer):
     """Trainer for ResNet50Baseline model with standard classification loss"""

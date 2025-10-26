@@ -35,20 +35,15 @@ Open `./docker/config.env` and set the path to where your data will live.
 #### Running the Project
 
 1. Start the Docker container by running the `run.sh` script:
-   ```bash
-   ./docker/run.sh
-   ```
-
-The default behavior of this script is to open Jupyter Lab. When the Jupyter Lab server comes up, you can start running code and editing in the Jupyter Lab environment by going to `localhost:8888/lab` in your browser.
-
-
-Alternatively, you can open an interactive Bash session instead of Jupyter Lab via:
-
 ```bash
 ./docker/run.sh bash
 ```
 
-You can consider attaching a VSCode session to the resulting container.
+This opens an interactive Bash session.
+
+Our preferred workflow is to attach a VSCode session to the resulting container (https://code.visualstudio.com/docs/devcontainers/attach-container).
+
+The default behavior of this script is to open Jupyter Lab. When the Jupyter Lab server comes up, you can start running code and editing in the Jupyter Lab environment by going to `localhost:8888/lab` in your browser.
 
 #### Troubleshooting
 
@@ -68,8 +63,15 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 
 ## Contents
 
-- `geirhos/`: Preprocessing & training code for reproducing results from Geirhos et al. (2018).
-- `metric_csvs/`: Raw training/validation/test result outputs.
+- `src/`: Source code for this project.
+   - `domain_adaptation_ct/`: Module for this project.
+      - `dataset/`: 
+      - `evaluate/`: 
+      - `learn/`: 
+      - `logging/`: 
+      - `preprocess/`: 
+      - `visualize/`: 
+- `results/`: Raw training/validation/test result outputs.
 - `src/`: Source code files. Primarily contains sinogram manipulation code right now.
 - `*_pipeline*.ipynb`: Jupyter Notebooks used for model training for each experiment on OrganAMNIST data. In our convention expanding on notation used by Geirhos et al., "A" models are trained on single distortions, "C" models are trained on all-but-one distortion, and "D" models are based on Ganin & Lempitsky (2015)'s domain adaptation architecture.
 - `GaninDALoss.ipynb`: Quick demonstration that the loss function component used for the label predictor successfully excludes influence of target domain instances.

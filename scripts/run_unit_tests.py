@@ -12,7 +12,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", handlers=[logging.StreamHandler()])
 
 def unit_test_loss():
-    from src.learn.loss import MaskedDomainAdversarialLoss
+    from domain_adaptation_ct.learn.loss import MaskedDomainAdversarialLoss
 
     import torch
     
@@ -53,7 +53,7 @@ def unit_test_loss():
 
 
 def unit_test_gradient_reversal():
-    from src.learn.gradient_reversal import GradientReversal
+    from domain_adaptation_ct.learn.gradient_reversal import GradientReversal
     
     import torch
 
