@@ -15,7 +15,6 @@ class BranchedOutput(ModelOutput):
     loss: Optional[torch.FloatTensor] = None
     branch1_logits: Optional[torch.FloatTensor] = None
     branch2_logits: Optional[torch.FloatTensor] = None
-    features: Optional[torch.FloatTensor] = None
 
 class ResNet50Baseline(PreTrainedModel):
     """
@@ -62,7 +61,6 @@ class ResNet50Baseline(PreTrainedModel):
             loss = loss,
             branch1_logits = logits,
             branch2_logits = None,
-            features = features,
         )
 
     @classmethod
@@ -85,12 +83,10 @@ class ResNet50DANN(ResNet50Baseline):
         super().__init__(num_classes)
 
         self.grad_reverse = GradientReversal(lamb=lamb_initial)
-
-        self.domain_classifier = torch.nn.Linear(512, 1)
         
         self.branch2 = torch.nn.Sequential(
             self.grad_reverse,
-            self.domain_classifier,
+            torch.nn.Linear(512, 1)
         )
 
         # Loss function used only by trainer.
@@ -114,13 +110,12 @@ class ResNet50DANN(ResNet50Baseline):
 
         loss = None
         if (labels1 is not None) and (labels2 is not None):
-            loss = self.loss_fn(logits1, logits2, labels1, labels2, self.ld_scale)
+            loss = self.loss_fn(logits1, logits2, labels1, labels2.view(-1, 1), self.ld_scale)
 
         return BranchedOutput(
             loss = loss,
             branch1_logits = logits1,
             branch2_logits = logits2,
-            features = features,
         )
 
 

@@ -13,10 +13,10 @@ training:
     dataset:
         cls_name: TwoLabelDataset
         cls_train_load_args:
-            file_path: /data/D21_preprocessed/pseudo_fold_0.npz
+            file_path: /data/D21_preprocessed/tiny_fold_0.npz
             convert_grayscale_to_rgb: True
         cls_eval_load_args:
-            file_path: /data/D21_preprocessed/pseudo_fold_1.npz
+            file_path: /data/D21_preprocessed/tiny_fold_1.npz
             convert_grayscale_to_rgb: True
     training_arguments:
         output_dir: /data/D21_train_results/
@@ -34,7 +34,7 @@ evaluation:
     dataset:
         cls_name: TwoLabelDataset
         cls_eval_load_args:
-            file_path: /data/D21_preprocessed/pseudo_fold_3.npz
+            file_path: /data/D21_preprocessed/tiny_fold_3.npz
             convert_grayscale_to_rgb: True
     output_dir: /data/D21_eval_results/
     batch_size: 32

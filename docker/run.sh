@@ -85,5 +85,6 @@ MSYS_NO_PATHCONV=1 docker run \
     -v "${DATA_PATH}":"/data/" \
     -w "/repo/" \
     -p 8888:8888 \
+    --memory="28g" \
     dact-image \
     "$@"
