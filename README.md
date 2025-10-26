@@ -65,12 +65,11 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 
 - `src/`: Source code for this project.
    - `domain_adaptation_ct/`: Module for this project.
-      - `dataset/`: 
-      - `evaluate/`: 
-      - `learn/`: 
-      - `logging/`: 
-      - `preprocess/`: 
-      - `visualize/`: 
+      - `dataset/`: Data.
+      - `preprocess/`: Preprocessing.
+      - `learn/`: Training & evaluation.
+      - `visualize/`: Visualize images.
+      - `logging/`: Logging.
 - `results/`: Raw training/validation/test result outputs.
 - `src/`: Source code files. Primarily contains sinogram manipulation code right now.
 - `*_pipeline*.ipynb`: Jupyter Notebooks used for model training for each experiment on OrganAMNIST data. In our convention expanding on notation used by Geirhos et al., "A" models are trained on single distortions, "C" models are trained on all-but-one distortion, and "D" models are based on Ganin & Lempitsky (2015)'s domain adaptation architecture.
@@ -81,11 +80,6 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 - `evaluate_experiment.ipynb`: Model evaluation code.
 - `medmnist_eda.ipynb`: Exploratory data analysis of MedMNIST datasets.
 - `view_test_results.ipynb`: Model training/validation curve and test matrix visualization code. 
-
-## References
-
-- Ganin, Y., & Lempitsky, V. (2015, June). Unsupervised domain adaptation by backpropagation. In International conference on machine learning (pp. 1180-1189). PMLR.
-- Geirhos, R., Temme, C. R., Rauber, J., Schütt, H. H., Bethge, M., & Wichmann, F. A. (2018). Generalisation in humans and deep neural networks. Advances in neural information processing systems, 31.
 
 ## TODO
 

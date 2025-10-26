@@ -1,57 +1,111 @@
 import numpy as np
 import torch
 from torchvision import transforms
+from typing import Optional
 
-class OneLabelDataset(torch.utils.data.Dataset):
-    def __init__(self, images, labels1):
+class BaseImageDataset(torch.utils.data.Dataset):
+    """Base dataset class handling image loading and transforms."""
+    
+    def __init__(
+        self, 
+        images: np.ndarray,
+        convert_grayscale_to_rgb: bool,
+        additional_transforms: Optional[transforms.Compose] = None
+    ):
+        """
+        Args:
+            images: Input image array
+            convert_grayscale_to_rgb: Whether to convert 1-channel grayscale images to 3-channel (ResNet input format)
+            additional_transforms: Optional transforms to apply after base transforms
+        """
         self.images = images
-        self.labels1 = labels1
+        
+        # Build transform pipeline
+        transform_list = [transforms.ToTensor()]
+        
+        if convert_grayscale_to_rgb:
+            transform_list.append(
+                transforms.Lambda(lambda x: x.repeat(3, 1, 1))
+            )
+            
+        if additional_transforms:
+            transform_list.append(additional_transforms)
+            
+        self.transform = transforms.Compose(transform_list)
 
-        self.transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Lambda(lambda x: x.repeat(3, 1, 1))  # Grayscale to 3-channel
-        ])
-
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.images)
-
-    def __getitem__(self, idx: int) -> dict[str, np.ndarray]:
-        img = self.images[idx]
-        label1 = int(self.labels1[idx])
-
-        if self.transform:
-            img = self.transform(img)
-
-        return {
-            "pixel_values": img,
-            "labels1": label1,
-        }
-
-    @staticmethod
-    def load(file_path: str):
-        data = np.load(file_path, allow_pickle=True)
-        images = data['images']
-        labels1 = data['labels1']
-
-        return OneLabelDataset(images, labels1)
-
-class TwoLabelDataset(OneLabelDataset):
-    def __init__(self, images, labels1, labels2):
-        super().__init__(images, labels1)
-        self.labels2 = labels2
-
-    def __getitem__(self, idx):
-        sample = super().__getitem__(idx)
-        label2 = int(self.labels2[idx])
-        sample["labels2"] = label2
-        return sample
     
     @staticmethod
-    def load(file_path: str):
-        data = np.load(file_path, allow_pickle=True)
-        images = data['images']
-        labels1 = data['labels1']
-        labels2 = data['labels2']
+    def load_data(file_path: str) -> dict[str, np.ndarray]:
+        return np.load(file_path, allow_pickle=True)
 
-        return TwoLabelDataset(images, labels1, labels2)
+class OneLabelDataset(BaseImageDataset):
+    def __init__(
+        self, 
+        images: np.ndarray,
+        labels1: np.ndarray,
+        convert_grayscale_to_rgb: bool,
+        additional_transforms: Optional[transforms.Compose] = None
+    ):
+        super().__init__(images, convert_grayscale_to_rgb, additional_transforms)
+        self.labels1 = labels1
 
+    def __getitem__(self, idx: int) -> dict[str, int]:
+        img = self.images[idx]
+        img = self.transform(img)
+        
+        return {
+            "pixel_values": img,
+            "labels1": int(self.labels1[idx]),
+        }
+
+    @classmethod
+    def load(
+        cls, 
+        file_path: str, 
+        convert_grayscale_to_rgb: bool,
+    ) -> 'OneLabelDataset':
+        data = cls.load_data(file_path)
+        return cls(
+            data['images'], 
+            data['labels1'],
+            convert_grayscale_to_rgb
+        )
+
+class TwoLabelDataset(BaseImageDataset):
+    def __init__(
+        self,
+        images: np.ndarray,
+        labels1: np.ndarray,
+        labels2: np.ndarray,
+        convert_grayscale_to_rgb: bool,
+        additional_transforms: Optional[transforms.Compose] = None
+    ):
+        super().__init__(images, convert_grayscale_to_rgb, additional_transforms)
+        self.labels1 = labels1
+        self.labels2 = labels2
+
+    def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
+        img = self.images[idx]
+        img = self.transform(img)
+        
+        return {
+            "pixel_values": img,
+            "labels1": int(self.labels1[idx]),
+            "labels2": int(self.labels2[idx]),
+        }
+
+    @classmethod
+    def load(
+        cls, 
+        file_path: str,
+        convert_grayscale_to_rgb: bool,
+    ) -> 'TwoLabelDataset':
+        data = cls.load_data(file_path)
+        return cls(
+            data['images'],
+            data['labels1'],
+            data['labels2'],
+            convert_grayscale_to_rgb
+        )
