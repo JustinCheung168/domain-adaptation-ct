@@ -3,7 +3,7 @@ import torch
 from torchvision import transforms
 from typing import Optional
 
-from domain_adaptation_ct.logging.logging_mixin import LogMixin
+from domain_adaptation_ct.logging.log_mixin import LogMixin
 
 class BaseImageDataset(torch.utils.data.Dataset, LogMixin):
     """Base dataset class handling image loading and transforms."""

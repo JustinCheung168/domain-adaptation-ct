@@ -9,7 +9,8 @@ from domain_adaptation_ct.learn.architectures import ARCHITECTURE_REGISTRY
 from domain_adaptation_ct.learn.lambda_schedules import LAMBDA_SCHEDULER_REGISTRY, LambdaUpdateCallback
 from domain_adaptation_ct.learn.metrics import make_metrics_fn
 from domain_adaptation_ct.learn.trainers import TRAINER_REGISTRY
-from domain_adaptation_ct.logging.logging_mixin import init_logging
+from domain_adaptation_ct.logging.log_mixin import init_logging
+from domain_adaptation_ct.logging.epoch_csv_logging import CSVLoggingCallback
 
 import torch
 from transformers import Trainer, TrainingArguments
@@ -20,6 +21,7 @@ def train_model(
     train_dataset: torch.utils.data.Dataset,
     eval_dataset: torch.utils.data.Dataset,
     output_dir: str,
+    logging_dir: str,
     num_train_epochs: int,
     batch_size: int,
     learning_rate: float,
@@ -40,19 +42,26 @@ def train_model(
         scheduler_name = "no_lambda_scheduler"
     else:
         assert hasattr(model, "grad_reverse"), "Must specify a lambda scheduler with the `grad_reverse` layer."
-        callbacks.append(LambdaUpdateCallback(model, lambda_scheduler, num_train_epochs))
+        callbacks.append(LambdaUpdateCallback(model, lambda_scheduler))
         scheduler_name = lambda_scheduler.__name__
 
+    # Unique identifier for this run
     date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    run_id_str = f"{scheduler_name}_fold_{fold_index}_{date_str}"
+
+    # Log epochs on each metric
+    callbacks.append(CSVLoggingCallback(os.path.join(logging_dir, f"{run_id_str}.csv")))
+
     os.makedirs(output_dir, exist_ok=True)
-    output_dir_results = os.path.join(output_dir, f"{scheduler_name}_fold_{fold_index}_results_{date_str}")
-    model_save_path = os.path.join(output_dir, f"{scheduler_name}_fold_{fold_index}_final_model_{date_str}")
+    output_dir_results = os.path.join(output_dir, f"{run_id_str}_results")
+    model_save_path = os.path.join(output_dir, f"{run_id_str}_final_model")
 
     logging.info(f"Will write results to {output_dir_results}.")
     logging.info(f"Will write model to {model_save_path}.")
 
     training_args = TrainingArguments(
         output_dir=output_dir_results,
+        logging_dir=logging_dir,
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
@@ -89,7 +98,9 @@ def run_experiment_from_config_file(
     """Top-level call if using a config file."""
     cfg = TrainingConfig(config_file).config_dict
 
-    init_logging(log_dir=cfg["log_dir"])
+    logging_dir=cfg["logging_dir"]
+
+    init_logging(logging_dir=logging_dir)
 
     # Instantiate the model.
     architecture_cls = ARCHITECTURE_REGISTRY[cfg["architecture"]["cls_name"]]
@@ -119,6 +130,7 @@ def run_experiment_from_config_file(
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         output_dir=cfg["training"]["training_arguments"]["output_dir"],
+        logging_dir=logging_dir,
         num_train_epochs=cfg["training"]["training_arguments"]["num_train_epochs"],
         batch_size=cfg["training"]["training_arguments"]["batch_size"],
         learning_rate=cfg["training"]["training_arguments"]["learning_rate"],

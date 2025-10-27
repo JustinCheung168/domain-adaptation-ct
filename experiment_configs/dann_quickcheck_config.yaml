@@ -1,5 +1,5 @@
 ---
-log_dir: /repo/results/logs/
+logging_dir: /repo/results/logs/
 architecture:
     cls_name: ResNet50DANN
     cls_init_args:

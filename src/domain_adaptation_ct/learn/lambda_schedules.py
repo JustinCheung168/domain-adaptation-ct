@@ -2,10 +2,9 @@ import numpy as np
 from transformers import TrainerCallback
 
 class LambdaUpdateCallback(TrainerCallback):
-    def __init__(self, model, lambda_scheduler, total_epochs):
+    def __init__(self, model, lambda_scheduler):
         self.model = model
         self.lambda_scheduler = lambda_scheduler
-        self.total_epochs = total_epochs
 
     def on_epoch_begin(self, args, state, control, **kwargs):
         new_lambda = self.lambda_scheduler(state.epoch, args.num_train_epochs)

@@ -1,6 +1,6 @@
 # Improving Artifact Robustness for CT Deep Learning Models Without Labeled Artifact Images via Domain Adaptation
 
-## Usage
+## Environment Setup
 
 ### Setting up Docker
 
@@ -32,18 +32,26 @@ This project uses Docker to control requirements and aid in cross-platform compa
 
 Open `./docker/config.env` and set the path to where your data will live.
 
-#### Running the Project
+#### Running the Environment
 
-1. Start the Docker container by running the `run.sh` script:
+1. Start the Docker container and open an interactive Bash session inside it by running the `run.sh` script:
 ```bash
 ./docker/run.sh bash
 ```
 
-This opens an interactive Bash session.
+2. Install the Python dependencies for this project:
+```bash
+pip install -e .
+```
 
-Our preferred workflow is to attach a VSCode session to the resulting container (https://code.visualstudio.com/docs/devcontainers/attach-container).
+Our preferred workflow is to attach a VSCode session to the container produced by the above (https://code.visualstudio.com/docs/devcontainers/attach-container).
 
-The default behavior of this script is to open Jupyter Lab. When the Jupyter Lab server comes up, you can start running code and editing in the Jupyter Lab environment by going to `localhost:8888/lab` in your browser.
+If you prefer to use Jupyter Lab instead, you can run the below script. When the Jupyter Lab server comes up, you can start running code and editing in the Jupyter Lab environment by going to `localhost:8888/lab` in your browser.
+
+3. (Optional) Open Jupyter Lab
+```bash
+./scripts/start_jupyter_lab.sh
+```
 
 #### Troubleshooting
 
@@ -65,11 +73,12 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 
 - `src/`: Source code for this project.
    - `domain_adaptation_ct/`: Module for this project.
-      - `dataset/`: Data.
-      - `preprocess/`: Preprocessing.
-      - `learn/`: Training & evaluation.
-      - `visualize/`: Visualize images.
-      - `logging/`: Logging.
+      - `config/`: Classes for config files.
+      - `dataset/`: Classes for reading and interacting with datasets.
+      - `learn/`: Classes & functions for model training & evaluation.
+      - `logging/`: Classes for logging.
+      - `preprocess/`: Functions for preprocessing data.
+      - `visualize/`: Classes for visualizing images.
 - `results/`: Raw training/validation/test result outputs.
 - `src/`: Source code files. Primarily contains sinogram manipulation code right now.
 - `*_pipeline*.ipynb`: Jupyter Notebooks used for model training for each experiment on OrganAMNIST data. In our convention expanding on notation used by Geirhos et al., "A" models are trained on single distortions, "C" models are trained on all-but-one distortion, and "D" models are based on Ganin & Lempitsky (2015)'s domain adaptation architecture.
@@ -80,6 +89,19 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 - `evaluate_experiment.ipynb`: Model evaluation code.
 - `medmnist_eda.ipynb`: Exploratory data analysis of MedMNIST datasets.
 - `view_test_results.ipynb`: Model training/validation curve and test matrix visualization code. 
+
+## Usage
+
+1. Download data from [huggingface.co/datasets/NNDLCLASS](huggingface.co/datasets/NNDLCLASS).
+2. Specify details of your experiment in `experiment_configs/`. An example is provided in `experiment_configs/dann_quickcheck_config.yaml`.
+3. Run an experiment, including training & inference:
+```bash
+./scripts/run_experiment.py experiment_configs/dann_quickcheck_config.yaml
+```
+
+## Citation
+
+Cheung, J., Savine, S., Nguyen, C., Lu, L., & Yasin, A. S. (2025). Improving Artifact Robustness for CT Deep Learning Models Without Labeled Artifact Images via Domain Adaptation. arXiv preprint arXiv:2510.06584.
 
 ## TODO
 

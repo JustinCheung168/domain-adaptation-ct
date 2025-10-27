@@ -1,6 +1,6 @@
 from transformers import Trainer
 
-from domain_adaptation_ct.logging.logging_mixin import LogMixin
+from domain_adaptation_ct.logging.log_mixin import LogMixin
 
 class BaselineTrainer(Trainer, LogMixin):
     """
