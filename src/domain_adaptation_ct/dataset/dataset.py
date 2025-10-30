@@ -145,12 +145,10 @@ class MultifoldDataset(torch.utils.data.Dataset, LogMixin):
     def __getitem__(self, idx: int) -> dict[str, torch.Tensor]:
         """Retrieve item idx from the appropriate dataset."""
         ds_idx, local_idx = self._locate_dataset(idx)
-        print(f"INDEX: {idx}, {ds_idx}, {local_idx}")
         return self.datasets[ds_idx][local_idx]
 
     def _locate_dataset(self, idx: int):
         for dataset_num, cum_len in enumerate(self.cumulative_lengths):
-            print(f"{dataset_num}, {cum_len}")
             if idx < cum_len:
                 if dataset_num == 0:
                     prev_cum = 0
