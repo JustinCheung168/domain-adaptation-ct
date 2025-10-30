@@ -10,16 +10,16 @@ class CSVLoggingCallback(TrainerCallback):
 
     def on_log(self, args, state: TrainerState, control, logs, **kwargs):
         """Store training info internally, to be recorded after validation metrics are captured."""
-        assert 'loss' in logs, "Didn't see loss in logs - please make sure the Trainer captures it."
-        assert 'learning_rate' in logs, "Didn't see learning_rate in logs - please make sure the Trainer captures it."
+        if 'loss' in logs: # Use this condition to check if we are performing training.
+            assert 'learning_rate' in logs, "Didn't see learning_rate in logs - please make sure the Trainer captures it."
 
-        self.epoch_data[state.epoch] = {
-            'epoch': state.epoch,
-            'step': state.global_step,
-            'train_loss': logs['loss'],
-            'learning_rate': logs['learning_rate'],
-            'grad_norm': logs['grad_norm']
-        }
+            self.epoch_data[state.epoch] = {
+                'epoch': state.epoch,
+                'step': state.global_step,
+                'train_loss': logs['loss'],
+                'learning_rate': logs['learning_rate'],
+                'grad_norm': logs['grad_norm']
+            }
 
     def on_evaluate(self, args, state: TrainerState, control, metrics, **kwargs):
         """Capture validation metrics and write both training & validation results to CSV."""

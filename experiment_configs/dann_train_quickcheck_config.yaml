@@ -1,5 +1,5 @@
 ---
-logging_dir: /repo/results/logs/
+output_dir: /data/dann_train_quickcheck_results/
 architecture:
     cls_name: ResNet50DANN
     cls_init_args:
@@ -16,26 +16,21 @@ training:
             - /data/toy/fold0.npz
             - /data/toy/fold1.npz
             - /data/toy/fold2.npz
-            - /data/toy/fold3.npz
-            - /data/toy/fold4.npz
         # For each fold, specify which files to include in training vs. validation as indices of the `fold_file_paths` list.
         folds:
             -
                 train:
                     - 1
                     - 2
-                    - 3
                 val:
                     - 0
             - 
                 train:
                     - 0
                     - 2
-                    - 3
                 val:
                     - 1
     training_arguments:
-        output_dir: /data/D21_train_results/
         num_train_epochs: 3
         batch_size: 32
         learning_rate: 0.1
@@ -43,14 +38,3 @@ training:
         optim: sgd
         resume_from_checkpoint: False
     lambda_scheduler: parabolic_increasing_lambda_scheduler
-
-evaluation:
-    evaluator:
-        cls_name: DANNTrainer
-    dataset:
-        cls_name: TwoLabelDataset
-        cls_eval_load_args:
-            file_path: /data/D21_preprocessed/tiny_fold_3.npz
-            convert_grayscale_to_rgb: True
-    output_dir: /data/D21_eval_results/
-    batch_size: 32

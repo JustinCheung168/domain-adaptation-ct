@@ -53,6 +53,12 @@ If you prefer to use Jupyter Lab instead, you can run the below script. When the
 ./scripts/start_jupyter_lab.sh
 ```
 
+#### Hardware Recommendations
+
+You likely need at least 32GB of RAM to work with this project, due to the size of the preprocessed training data file.
+
+This project expects to have NVIDIA GPU access.
+
 #### Troubleshooting
 
 In one Windows system, we observed a failure in the `docker/run.sh` script that is potentially resolved by replacing the final docker run command with the following:
@@ -93,10 +99,14 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 ## Usage
 
 1. Download data from [huggingface.co/datasets/NNDLCLASS](huggingface.co/datasets/NNDLCLASS).
-2. Specify details of your experiment in `experiment_configs/`. An example is provided in `experiment_configs/dann_quickcheck_config.yaml`.
-3. Run an experiment, including training & inference:
+2. Specify details of your experiment in `experiment_configs/`. Example config values are specified as arguments to the commands below.
+3. Run training:
 ```bash
-./scripts/run_experiment.py experiment_configs/dann_quickcheck_config.yaml
+./scripts/run_training.py experiment_configs/dann_train_quickcheck_config.yaml
+```
+4. Run evaluation:
+```bash
+./scripts/run_evaluation.py experiment_configs/dann_test_quickcheck_config.yaml
 ```
 
 ## Citation
