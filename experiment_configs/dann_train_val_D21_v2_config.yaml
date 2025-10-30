@@ -1,23 +1,27 @@
 ---
-log_dir: /repo/results/logs/
+logging_dir: /repo/results/logs/
 architecture:
     cls_name: ResNet50DANN
     cls_init_args:
         num_classes: 11
         lamb_initial: 0.0
         ld_scale: 1.0
-# TODO - support 5-fold CV
 training:
     trainer:
         cls_name: DANNTrainer
     dataset:
         cls_name: TwoLabelDataset
-        cls_train_load_args:
-            file_path: /data/D21_preprocessed/D21_preprocessed_train_v2.npz
-            convert_grayscale_to_rgb: True
-        cls_eval_load_args:
-            file_path: /data/D21_preprocessed/D21_preprocessed_val_v2.npz
-            convert_grayscale_to_rgb: True
+        convert_grayscale_to_rgb: True
+        fold_file_paths:
+            - /data/D21_preprocessed/D21_preprocessed_train_v2.npz
+            - /data/D21_preprocessed/D21_preprocessed_val_v2.npz
+        # For each fold, specify which files to include in training vs. validation as indices of the `fold_file_paths` list.
+        folds:
+            -
+                train:
+                    - 0
+                val:
+                    - 1
     training_arguments:
         output_dir: /data/D21_train_results/
         num_train_epochs: 3
