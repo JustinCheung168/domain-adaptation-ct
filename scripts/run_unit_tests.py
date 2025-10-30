@@ -74,13 +74,92 @@ def unit_test_gradient_reversal():
     expected_grad = -lamb * torch.ones_like(f)
     assert torch.all(f.grad == expected_grad), "Backward pass should scale gradient by negative lambda."
 
-    print("unit_test_gradient_reversal passed.")
+    logging.info("unit_test_gradient_reversal passed.")
 
+
+def _dicts_containing_tensors_are_equal(d1, d2):
+    """Compare dictionaries containing tensors (plain `==` operator is ambiguous otherwise)"""
+    import torch
+    if d1.keys() != d2.keys():
+        return False
+    for key in d1:
+        val1, val2 = d1[key], d2[key]
+        if isinstance(val1, torch.Tensor) and isinstance(val2, torch.Tensor):
+            if not torch.equal(val1, val2):
+                return False
+        else:
+            if val1 != val2:
+                return False
+    return True
+
+
+def unit_test_multifold_dataset():
+    from domain_adaptation_ct.dataset.image_dataset import TwoLabelDataset
+    from domain_adaptation_ct.dataset.multifold_dataset import MultifoldDataset
+
+    import numpy as np
+
+    image_dataset_1 = TwoLabelDataset(
+        images = np.array([
+            [
+                [1.1, 1.2],
+                [1.3, 1.4],
+            ],
+            [
+                [2.1, 2.2],
+                [2.3, 2.4],
+            ],
+        ]),
+        labels1 = np.array([
+            [7],
+            [8],
+        ]),
+        labels2 = np.array([
+            [9],
+            [10],
+        ]),
+        convert_grayscale_to_rgb = False,
+    )
+
+    image_dataset_2 = TwoLabelDataset(
+        images = np.array([
+            [
+                [3.1, 3.2],
+                [3.3, 3.4],
+            ],
+            [
+                [4.1, 4.2],
+                [4.3, 4.4],
+            ],
+        ]),
+        labels1 = np.array([
+            [11],
+            [12],
+        ]),
+        labels2 = np.array([
+            [13],
+            [14],
+        ]),
+        convert_grayscale_to_rgb = False,
+    )
+
+    multifold_dataset = MultifoldDataset(datasets = [image_dataset_1, image_dataset_2])
+
+    assert _dicts_containing_tensors_are_equal(multifold_dataset[0], image_dataset_1[0])
+    assert _dicts_containing_tensors_are_equal(multifold_dataset[1], image_dataset_1[1])
+    assert _dicts_containing_tensors_are_equal(multifold_dataset[2], image_dataset_2[0])
+    assert _dicts_containing_tensors_are_equal(multifold_dataset[3], image_dataset_2[1])
+
+    logging.info("unit_test_multifold_dataset passed.")
 
 if __name__ == "__main__":
-    print("Now running unit tests. If this script crashes, then one of the unit tests failed.")
+    logging.info("Now running unit tests. If this script crashes, then one of the unit tests failed.")
+
+    # Add more tests here as you write them.
+    unit_test_multifold_dataset()
     unit_test_loss()
     unit_test_gradient_reversal()
-    print("All tests passed.")
+
+    logging.info("All tests passed.")
 
 
