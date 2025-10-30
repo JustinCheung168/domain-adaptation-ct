@@ -6,18 +6,34 @@ architecture:
         num_classes: 11
         lamb_initial: 0.0
         ld_scale: 1.0
-# TODO - support 5-fold CV
 training:
     trainer:
         cls_name: DANNTrainer
     dataset:
         cls_name: TwoLabelDataset
-        cls_train_load_args:
-            file_path: /data/D21_preprocessed/tiny_fold_0.npz
-            convert_grayscale_to_rgb: True
-        cls_eval_load_args:
-            file_path: /data/D21_preprocessed/tiny_fold_1.npz
-            convert_grayscale_to_rgb: True
+        convert_grayscale_to_rgb: True
+        fold_file_paths:
+            - /data/toy/fold0.npz
+            - /data/toy/fold1.npz
+            - /data/toy/fold2.npz
+            - /data/toy/fold3.npz
+            - /data/toy/fold4.npz
+        # For each fold, specify which files to include in training vs. validation as indices of the `fold_file_paths` list.
+        folds:
+            -
+                train:
+                    - 1
+                    - 2
+                    - 3
+                val:
+                    - 0
+            - 
+                train:
+                    - 0
+                    - 2
+                    - 3
+                val:
+                    - 1
     training_arguments:
         output_dir: /data/D21_train_results/
         num_train_epochs: 3

@@ -4,7 +4,7 @@ import logging
 from typing import Optional, Callable
 
 from domain_adaptation_ct.config.experiment_config import TrainingConfig, EvaluationConfig
-from domain_adaptation_ct.dataset.dataset import DATASET_REGISTRY
+from domain_adaptation_ct.dataset.dataset import DATASET_REGISTRY, MultifoldDataset
 from domain_adaptation_ct.learn.architectures import ARCHITECTURE_REGISTRY
 from domain_adaptation_ct.learn.lambda_schedules import LAMBDA_SCHEDULER_REGISTRY, LambdaUpdateCallback
 from domain_adaptation_ct.learn.metrics import make_metrics_fn
@@ -107,38 +107,59 @@ def run_experiment_from_config_file(
     model = architecture_cls(**cfg["architecture"]["cls_init_args"])
     logging.info(f"Instantiated model {architecture_cls.__name__}. Summary:\n{model}")
 
-    # Instantiate the datasets.
+    # Load the dataset files.
     dataset_cls = DATASET_REGISTRY[cfg["training"]["dataset"]["cls_name"]]
-    train_dataset = dataset_cls.load(**cfg["training"]["dataset"]["cls_train_load_args"])
-    logging.info(f"Instantiated train dataset {dataset_cls.__name__}, length {len(train_dataset)}")
+    fold_file_paths = cfg["training"]["dataset"]["fold_file_paths"]
+    fold_datasets = []
+    for fold_file_path in fold_file_paths:
+        fold_datasets.append(
+            dataset_cls.load(
+                file_path = fold_file_path,
+                convert_grayscale_to_rgb = cfg["training"]["dataset"]["convert_grayscale_to_rgb"]
+            )
+        )
 
-    eval_dataset = dataset_cls.load(**cfg["training"]["dataset"]["cls_eval_load_args"])
-    logging.info(f"Instantiated eval dataset {dataset_cls.__name__}, length {len(eval_dataset)}")
+    # Perform k-fold cross validation.
+    folds: list[dict[str, list[int]]] = cfg["training"]["dataset"]["folds"]
+    for fold_num in range(len(folds)):
 
-    trainer_cls = TRAINER_REGISTRY[cfg["training"]["trainer"]["cls_name"]]
+        # Read which folds comprise the training dataset.
+        train_folds = folds[fold_num]["train"]
+        train_fold_datasets = [fold_datasets[train_fold] for train_fold in train_folds]
+        # Give references to the appropriate datasets to the MultifoldDataset.
+        train_dataset = MultifoldDataset(datasets = train_fold_datasets)
+        logging.info(f"Instantiated train dataset {dataset_cls.__name__}, length {len(train_dataset)}")
 
-    lambda_scheduler = None
-    if "lambda_scheduler" in cfg["training"]:
-        lambda_scheduler = LAMBDA_SCHEDULER_REGISTRY[cfg["training"]["lambda_scheduler"]]
-        logging.info(f"Got lambda scheduler {lambda_scheduler.__name__}")
-    else:
-        logging.info(f"No lambda scheduler provided.")
+        # Read which folds comprise the validation dataset.
+        val_folds = folds[fold_num]["val"]
+        val_fold_datasets = [fold_datasets[val_fold] for val_fold in val_folds]
+        eval_dataset = MultifoldDataset(datasets = val_fold_datasets)
+        logging.info(f"Instantiated eval dataset {dataset_cls.__name__}, length {len(eval_dataset)}")
 
-    train_model(
-        trainer_cls=trainer_cls,
-        model=model,
-        train_dataset=train_dataset,
-        eval_dataset=eval_dataset,
-        output_dir=cfg["training"]["training_arguments"]["output_dir"],
-        logging_dir=logging_dir,
-        num_train_epochs=cfg["training"]["training_arguments"]["num_train_epochs"],
-        batch_size=cfg["training"]["training_arguments"]["batch_size"],
-        learning_rate=cfg["training"]["training_arguments"]["learning_rate"],
-        weight_decay=cfg["training"]["training_arguments"]["weight_decay"],
-        optim=cfg["training"]["training_arguments"]["optim"],
-        resume_from_checkpoint=cfg["training"]["training_arguments"]["resume_from_checkpoint"],
-        lambda_scheduler=lambda_scheduler,
-    )
+        trainer_cls = TRAINER_REGISTRY[cfg["training"]["trainer"]["cls_name"]]
+
+        lambda_scheduler = None
+        if "lambda_scheduler" in cfg["training"]:
+            lambda_scheduler = LAMBDA_SCHEDULER_REGISTRY[cfg["training"]["lambda_scheduler"]]
+            logging.info(f"Got lambda scheduler {lambda_scheduler.__name__}")
+        else:
+            logging.info(f"No lambda scheduler provided.")
+
+        train_model(
+            trainer_cls=trainer_cls,
+            model=model,
+            train_dataset=train_dataset,
+            eval_dataset=eval_dataset,
+            output_dir=cfg["training"]["training_arguments"]["output_dir"],
+            logging_dir=logging_dir,
+            num_train_epochs=cfg["training"]["training_arguments"]["num_train_epochs"],
+            batch_size=cfg["training"]["training_arguments"]["batch_size"],
+            learning_rate=cfg["training"]["training_arguments"]["learning_rate"],
+            weight_decay=cfg["training"]["training_arguments"]["weight_decay"],
+            optim=cfg["training"]["training_arguments"]["optim"],
+            resume_from_checkpoint=cfg["training"]["training_arguments"]["resume_from_checkpoint"],
+            lambda_scheduler=lambda_scheduler,
+        )
 
 
 def evaluate_model(
