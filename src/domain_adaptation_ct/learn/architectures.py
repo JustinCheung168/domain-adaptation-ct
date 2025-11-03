@@ -1,6 +1,7 @@
 from typing import Optional
 
 from dataclasses import dataclass
+from safetensors.torch import load_file
 import torch
 from transformers import PreTrainedModel, ResNetConfig
 from transformers.modeling_outputs import ModelOutput
@@ -117,6 +118,20 @@ class ResNet50DANN(ResNet50Baseline):
             branch1_logits = logits1,
             branch2_logits = logits2,
         )
+
+    @classmethod
+    def load(cls, file_path: str, num_classes: int, lamb_initial: float, ld_scale: float):
+        """Load from model.safetensors file"""
+        # Load safetensors weights
+        state_dict = load_file(file_path)
+
+        # Rebuild model and load weights.
+        # TODO - figure out a better way to ensure the parameters used in the original construction make it here.
+        model = ResNet50DANN(num_classes=num_classes, lamb_initial=lamb_initial, ld_scale=ld_scale)
+        model.load_state_dict(state_dict)
+
+        # Put into eval mode by default. The Trainer should manage the state if you are going to continue training from here.
+        model.eval()
 
 
 ARCHITECTURE_REGISTRY: dict[str, type[torch.nn.Module]] = {

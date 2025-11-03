@@ -3,7 +3,7 @@ import os
 import logging
 from typing import Optional, Callable
 
-from domain_adaptation_ct.config.experiment_config import TrainingConfig, EvaluationConfig
+from domain_adaptation_ct.config.experiment_config import TrainingConfig
 from domain_adaptation_ct.dataset.image_dataset import DATASET_REGISTRY
 from domain_adaptation_ct.dataset.multifold_dataset import MultifoldDataset
 from domain_adaptation_ct.learn.architectures import ARCHITECTURE_REGISTRY
