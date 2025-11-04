@@ -1,6 +1,6 @@
 ---
 # Path to the checkpoint-xyz/ directory containing the checkpoint to load the model and any other products of training from.
-checkpoint_dir: /data/dann_train_quickcheck_results/parabolic_increasing_lambda_scheduler_fold_0_2025-10-30_22-40-07/results/checkpoint-515/model.safetensors
+checkpoint_dir: /data/dann_train_quickcheck_results/old/parabolic_increasing_lambda_scheduler_fold_0_2025-10-30_22-40-07/results/checkpoint-515/model.safetensors
 output_dir: /data/dann_test_quickcheck_results/
 architecture:
     # This directory is expected to contain `model.safetensors` at minimum.

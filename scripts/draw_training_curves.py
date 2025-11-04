@@ -38,6 +38,12 @@ def draw_training_curves(csv_path, output_dir):
         'eval_recall_branch2',
         'eval_f1_branch2',
         'eval_lambda',
+        'eval_tn',
+        'eval_fp',
+        'eval_fn',
+        'eval_tp',
+        'eval_loss1',
+        'eval_loss2',
     ]
 
     for metric in metrics:

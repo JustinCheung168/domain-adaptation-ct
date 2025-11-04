@@ -9,7 +9,7 @@ class AbstractCSVLoggingCallback(TrainerCallback):
         self.header_written = False
         self.epoch_data = {}
 
-    def _write_row_to_csv(epoch_record: dict[str, Any]):
+    def _write_row_to_csv(self, epoch_record: dict[str, Any]):
         with open(self.csv_path, mode='a', newline='') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=epoch_record.keys())
             if not self.header_written:

@@ -16,6 +16,8 @@ class BranchedOutput(ModelOutput):
     loss: Optional[torch.FloatTensor] = None
     branch1_logits: Optional[torch.FloatTensor] = None
     branch2_logits: Optional[torch.FloatTensor] = None
+    loss1: Optional[torch.FloatTensor] = None
+    loss2: Optional[torch.FloatTensor] = None
 
 class ResNet50Baseline(PreTrainedModel):
     """
@@ -62,6 +64,8 @@ class ResNet50Baseline(PreTrainedModel):
             loss = loss,
             branch1_logits = logits,
             branch2_logits = None,
+            loss1 = None,
+            loss2 = None,
         )
 
     @classmethod
@@ -110,13 +114,17 @@ class ResNet50DANN(ResNet50Baseline):
         logits2 = self.branch2(features)
 
         loss = None
+        loss1 = None
+        loss2 = None
         if (labels1 is not None) and (labels2 is not None):
-            loss = self.loss_fn(logits1, logits2, labels1, labels2.view(-1, 1), self.ld_scale)
+            loss, loss1, loss2 = self.loss_fn(logits1, logits2, labels1, labels2.view(-1, 1), self.ld_scale)
 
         return BranchedOutput(
             loss = loss,
             branch1_logits = logits1,
             branch2_logits = logits2,
+            loss1 = loss1,
+            loss2 = loss2,
         )
 
     @classmethod
