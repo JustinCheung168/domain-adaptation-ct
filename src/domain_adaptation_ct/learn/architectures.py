@@ -133,6 +133,8 @@ class ResNet50DANN(ResNet50Baseline):
         # Put into eval mode by default. The Trainer should manage the state if you are going to continue training from here.
         model.eval()
 
+        return model
+
 
 ARCHITECTURE_REGISTRY: dict[str, type[torch.nn.Module]] = {
     "ResNet50Baseline": ResNet50Baseline,

@@ -11,7 +11,7 @@ from domain_adaptation_ct.learn.lambda_schedules import LAMBDA_SCHEDULER_REGISTR
 from domain_adaptation_ct.learn.metrics import make_metrics_fn
 from domain_adaptation_ct.learn.trainers import TRAINER_REGISTRY
 from domain_adaptation_ct.logging.log_mixin import init_logging
-from domain_adaptation_ct.logging.epoch_csv_logging import CSVLoggingCallback
+from domain_adaptation_ct.logging.epoch_csv_logging import EvaluationCSVLoggingCallback
 
 import torch
 from transformers import Trainer, TrainingArguments
@@ -23,9 +23,11 @@ def evaluate_model(
     output_dir: str,
     batch_size: int,
     fold_num: int,
-):
+) -> str:
     """
     """
+    callbacks = []
+
     # Unique identifier for this run
     date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     run_id_str = f"evaluation_{fold_num}_{date_str}"
@@ -39,7 +41,10 @@ def evaluate_model(
     # Each model shall have its own column.
     # Each domain in the test set shall have its own row.
     # This design is not permanent - needs to be adapted to our current format for test data
-    test_results_csv_save_path = os.path.join(run_output_dir, f"test_results.csv")
+    test_metrics_csv_save_path = os.path.join(run_output_dir, f"test_metrics.csv")
+    callbacks.append(EvaluationCSVLoggingCallback(test_metrics_csv_save_path))
+
+    output_dir_results = os.path.join(run_output_dir, f"results")
 
     evaluation_args = TrainingArguments(
         output_dir=output_dir_results,
@@ -59,8 +64,11 @@ def evaluate_model(
         compute_metrics=make_metrics_fn(model)
     )
 
+    # Metrics are recorded to CSV via EvaluationCSVLoggingCallback.
     metrics = evaluator.evaluate()
-    return metrics
+    logging.info(f"Metrics: {metrics}")
+
+    return run_output_dir
 
 def run_evaluation_from_config_file(config_file: str):
     """"""
@@ -78,6 +86,7 @@ def run_evaluation_from_config_file(config_file: str):
     # Load the dataset files.
     dataset_cls = DATASET_REGISTRY[cfg["evaluation"]["dataset"]["cls_name"]]
     fold_file_paths = cfg["evaluation"]["dataset"]["fold_file_paths"]
+    assert isinstance(fold_file_paths, list)
     fold_datasets = []
     for fold_file_path in fold_file_paths:
         fold_datasets.append(
@@ -88,7 +97,7 @@ def run_evaluation_from_config_file(config_file: str):
         )
 
     # Assume we only look at one fold at a time. This design needs to be reworked to be less convoluted (TODO)
-    folds: list[dict[str, list[int]]] = [{"val": fold_num} for fold_num in len(fold_file_paths)]
+    folds: list[dict[str, list[int]]] = [{"val": [fold_num]} for fold_num in range(len(fold_file_paths))]
     for fold_num in range(len(folds)):
         logging.info(f"Beginning evaluation of fold {fold_num} (#{fold_num+1} out of {len(folds)})")
 
@@ -109,4 +118,4 @@ def run_evaluation_from_config_file(config_file: str):
             fold_num=fold_num,
         )
 
-
+    # TODO - add some logic to merge the resulting CSV's. may want this to just be a separate script which takes all the paths this sent the CSV's to.
