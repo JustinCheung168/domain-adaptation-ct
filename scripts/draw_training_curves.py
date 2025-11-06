@@ -38,13 +38,14 @@ def draw_training_curves(csv_path, output_dir):
         'eval_recall_branch2',
         'eval_f1_branch2',
         'eval_lambda',
-        'eval_tn',
-        'eval_fp',
-        'eval_fn',
-        'eval_tp',
-        'eval_loss1',
-        'eval_loss2',
+        'eval_tn_branch2',
+        'eval_fp_branch2',
+        'eval_fn_branch2',
+        'eval_tp_branch2',
+        'eval_loss_branch1',
+        'eval_loss_branch2',
     ]
+    # TODO add a warning for metrics that weren't found
 
     for metric in metrics:
         if metric in df.columns:
