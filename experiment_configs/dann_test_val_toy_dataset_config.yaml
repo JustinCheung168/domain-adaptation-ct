@@ -19,5 +19,9 @@ evaluation:
         convert_grayscale_to_rgb: True
         fold_file_paths:
             - /data/toy/fold0.npz
+            - /data/toy/fold1.npz
+            - /data/toy/fold2.npz
+            - /data/toy/fold3.npz
+            - /data/toy/fold4.npz
     evaluation_arguments:
         batch_size: 32

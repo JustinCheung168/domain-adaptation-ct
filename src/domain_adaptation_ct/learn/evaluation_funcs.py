@@ -44,10 +44,7 @@ def evaluate_model(
     test_metrics_csv_save_path = os.path.join(run_output_dir, f"test_metrics.csv")
     callbacks.append(EvaluationCSVLoggingCallback(test_metrics_csv_save_path))
 
-    output_dir_results = os.path.join(run_output_dir, f"results")
-
     evaluation_args = TrainingArguments(
-        output_dir=output_dir_results,
         per_device_eval_batch_size=batch_size,
         seed=42,
         dataloader_drop_last=False,
@@ -61,7 +58,8 @@ def evaluate_model(
         args=evaluation_args,
         train_dataset=None,
         eval_dataset=eval_dataset,
-        compute_metrics=make_metrics_fn(model)
+        compute_metrics=make_metrics_fn(model),
+        callbacks=callbacks,
     )
 
     # Metrics are recorded to CSV via EvaluationCSVLoggingCallback.
