@@ -48,6 +48,8 @@ def evaluate_model(
         seed=42,
         dataloader_drop_last=False,
         report_to="none", # TODO test W&B integration
+        gradient_checkpointing=False,
+        dataloader_pin_memory=False,
     )
 
     logging.info(evaluation_args)
@@ -62,7 +64,8 @@ def evaluate_model(
     )
 
     # Metrics are recorded to CSV via EvaluationCSVLoggingCallback.
-    metrics = evaluator.evaluate()
+    with torch.no_grad():
+        metrics = evaluator.evaluate()
     logging.info(f"Metrics: {metrics}")
 
     return run_output_dir
@@ -115,6 +118,9 @@ def run_evaluation_from_config_file(config_file: str):
             )
 
             del eval_dataset
+            torch.cuda.empty_cache()
+        model.to('cpu')
         del model
+        torch.cuda.empty_cache()
 
     # TODO - add some logic to merge the resulting CSV's. may want this to just be a separate script which takes all the paths this sent the CSV's to.
