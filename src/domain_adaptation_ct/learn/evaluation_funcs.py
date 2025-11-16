@@ -7,7 +7,6 @@ from domain_adaptation_ct.config.experiment_config import EvaluationConfig
 from domain_adaptation_ct.dataset.image_dataset import DATASET_REGISTRY
 from domain_adaptation_ct.dataset.multifold_dataset import MultifoldDataset
 from domain_adaptation_ct.learn.architectures import ARCHITECTURE_REGISTRY
-from domain_adaptation_ct.learn.lambda_schedules import LAMBDA_SCHEDULER_REGISTRY, LambdaUpdateCallback
 from domain_adaptation_ct.learn.metrics import make_metrics_fn
 from domain_adaptation_ct.learn.trainers import TRAINER_REGISTRY
 from domain_adaptation_ct.logging.log_mixin import init_logging
