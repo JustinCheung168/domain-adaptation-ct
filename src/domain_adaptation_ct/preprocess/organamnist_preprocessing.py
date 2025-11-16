@@ -33,6 +33,12 @@ def import_data(directory, save_path=None, save=False):
 def normalize_image(image, mean=0.5, std=0.5):
     """
     Normalize an image tensor to have a mean and standard deviation.
+
+    This is not really mean/std standardization - this is actually rescaling the pixel values
+    of min-maxed normalized float images in range [0,1] to the new range [-1,1], equivalent to:
+    
+    scale_factor = rescaled_max - rescaled_min
+    return (image * scale_factor) + rescaled_min
     """
     return (image - mean) / std
 
