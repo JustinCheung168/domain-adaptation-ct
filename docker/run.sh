@@ -56,6 +56,7 @@ reminder_message() {
     echo "  - The container's internal state (such as installed packages)."
     echo "Make sure to write all data to /data/."
     echo "Make sure to update pyproject.toml with any new Python packages you needed to install to aid in reproducibility."
+    echo "To get started, please run from inside the container: pip install -e ."
 }
 
 # Case 1 - The container is already running.
