@@ -76,11 +76,6 @@ def run_evaluation_from_config_file(config_file: str):
 
     init_logging(logging_dir=output_dir)
 
-    # Instantiate the model.
-    architecture_cls = ARCHITECTURE_REGISTRY[cfg["architecture"]["cls_name"]]
-    model = architecture_cls.load(cfg["checkpoint_dir"], **cfg["architecture"]["cls_init_args"])
-    logging.info(f"Instantiated model {architecture_cls.__name__}. Summary:\n{model}")
-
     # Load the dataset files.
     dataset_cls = DATASET_REGISTRY[cfg["evaluation"]["dataset"]["cls_name"]]
     fold_file_paths = cfg["evaluation"]["dataset"]["fold_file_paths"]
@@ -94,26 +89,38 @@ def run_evaluation_from_config_file(config_file: str):
             )
         )
 
-    # Assume we only look at one fold at a time. This design needs to be reworked to be less convoluted (TODO)
-    folds: list[dict[str, list[int]]] = [{"val": [fold_num]} for fold_num in range(len(fold_file_paths))]
-    for fold_num in range(len(folds)):
-        logging.info(f"Beginning evaluation of fold {fold_num} (#{fold_num+1} out of {len(folds)})")
+    # Support running the same evaluation with many models
+    if "checkpoint_dirs" in cfg:
+        checkpoint_dirs = cfg["checkpoint_dirs"]
+    else:
+        checkpoint_dirs = [cfg["checkpoint_dir"]]
 
-        # Read which folds comprise the validation dataset.
-        val_folds = folds[fold_num]["val"]
-        val_fold_datasets = [fold_datasets[val_fold] for val_fold in val_folds]
-        eval_dataset = MultifoldDataset(datasets = val_fold_datasets)
-        logging.info(f"Instantiated eval dataset {dataset_cls.__name__}, length {len(eval_dataset)}, comprised of files {[fold_file_paths[val_fold] for val_fold in val_folds]}")
+    for checkpoint_dir in checkpoint_dirs:
+        # Instantiate the model.
+        architecture_cls = ARCHITECTURE_REGISTRY[cfg["architecture"]["cls_name"]]
+        model = architecture_cls.load(checkpoint_dir, **cfg["architecture"]["cls_init_args"])
+        logging.info(f"Instantiated model {architecture_cls.__name__}. Summary:\n{model}")
 
-        evaluator_cls = TRAINER_REGISTRY[cfg["evaluation"]["evaluator"]["cls_name"]]
+        # Assume we only look at one fold at a time. This design needs to be reworked to be less convoluted (TODO)
+        folds: list[dict[str, list[int]]] = [{"val": [fold_num]} for fold_num in range(len(fold_file_paths))]
+        for fold_num in range(len(folds)):
+            logging.info(f"Beginning evaluation of fold {fold_num} (#{fold_num+1} out of {len(folds)})")
 
-        run_output_dir = evaluate_model(
-            evaluator_cls=evaluator_cls,
-            model=model,
-            eval_dataset=eval_dataset,
-            output_dir=output_dir,
-            batch_size=cfg["evaluation"]["evaluation_arguments"]["batch_size"],
-            fold_num=fold_num,
-        )
+            # Read which folds comprise the validation dataset.
+            val_folds = folds[fold_num]["val"]
+            val_fold_datasets = [fold_datasets[val_fold] for val_fold in val_folds]
+            eval_dataset = MultifoldDataset(datasets = val_fold_datasets)
+            logging.info(f"Instantiated eval dataset {dataset_cls.__name__}, length {len(eval_dataset)}, comprised of files {[fold_file_paths[val_fold] for val_fold in val_folds]}")
+
+            evaluator_cls = TRAINER_REGISTRY[cfg["evaluation"]["evaluator"]["cls_name"]]
+
+            run_output_dir = evaluate_model(
+                evaluator_cls=evaluator_cls,
+                model=model,
+                eval_dataset=eval_dataset,
+                output_dir=output_dir,
+                batch_size=cfg["evaluation"]["evaluation_arguments"]["batch_size"],
+                fold_num=fold_num,
+            )
 
     # TODO - add some logic to merge the resulting CSV's. may want this to just be a separate script which takes all the paths this sent the CSV's to.
