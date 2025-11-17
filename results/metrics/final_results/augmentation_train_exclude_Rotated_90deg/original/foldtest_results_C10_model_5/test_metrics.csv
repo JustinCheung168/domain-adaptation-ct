@@ -1,0 +1,2 @@
+eval_loss,eval_model_preparation_time,eval_accuracy,eval_precision,eval_recall,eval_f1,eval_runtime,eval_samples_per_second,eval_steps_per_second,Dataset
+0.0009944540215656,0.004,0.999756406508818,0.9997459409502476,0.9997227357299432,0.9997343001584932,67.1891,610.992,76.381,original

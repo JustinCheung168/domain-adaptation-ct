@@ -6,7 +6,7 @@ checkpoint_dirs:
     - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_2_2025-11-11_09-26-56/model.safetensors
     - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_3_2025-11-11_12-08-36/model.safetensors
     - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_4_2025-11-11_14-50-27/model.safetensors
-output_dir: /data/dann_final_results/D21/ring_data/
+output_dir: /repo/results/metrics/final_results/dann_target_domain_ring_data/ring_data/
 architecture:
     # This directory is expected to contain `model.safetensors` at minimum.
     # This directory would have been produced by using `run_training.py`.

@@ -1,0 +1,2 @@
+eval_loss,eval_model_preparation_time,eval_accuracy,eval_precision,eval_recall,eval_f1,eval_runtime,eval_samples_per_second,eval_steps_per_second,Dataset
+21.71397399902344,0.003,0.2464922537269804,0.2683650828672685,0.1498124348153505,0.0998249096809048,69.7519,588.543,73.575,ring_data
