@@ -1,0 +1,41 @@
+---
+# D21 is our name for the DANN which is trained using the undistorted data as the source domain, and ring artifact data as the target domain.
+output_dir: /data/D21_training/
+architecture:
+    cls_name: ResNet50DANN
+    cls_init_args:
+        num_classes: 11
+        lamb_initial: 0.0
+        ld_scale: 1.0
+training:
+    trainer:
+        cls_name: DANNTrainer
+    dataset:
+        cls_name: TwoLabelDataset
+        convert_grayscale_to_rgb: True
+        fold_file_paths:
+            # Either find or make these. Each of these should have the keys: images, labels1, labels2
+            # This is a re-split of the training and validation data from OrganAMNIST, with distortions (labels2==0 is source domain, labels2==1 is target domain) 
+            - /data/D21_preprocessed_inputs/fold0.npz
+            - /data/D21_preprocessed_inputs/fold1.npz
+            - /data/D21_preprocessed_inputs/fold2.npz
+            - /data/D21_preprocessed_inputs/fold3.npz
+            - /data/D21_preprocessed_inputs/fold4.npz
+        # For each fold, specify which files to include in training vs. validation as indices of the `fold_file_paths` list.
+        folds:
+            -
+                train:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                val:
+                    - 0
+    training_arguments:
+        num_train_epochs: 50
+        batch_size: 32
+        learning_rate: 0.1
+        weight_decay: 0.0001
+        optim: sgd
+        resume_from_checkpoint: False
+    lambda_scheduler: parabolic_decreasing_lambda_scheduler
