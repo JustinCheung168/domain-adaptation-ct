@@ -1,0 +1,2740 @@
+[INFO|evaluation_funcs.py:96] 2025-11-17 01:55:27,934 >> Instantiated model ResNet50DANN from /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_0_2025-11-11_04-01-11/model.safetensors. Summary:
+ResNet50DANN(
+  (resnet): ResNetModel(
+    (embedder): ResNetEmbeddings(
+      (embedder): ResNetConvLayer(
+        (convolution): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activation): ReLU()
+      )
+      (pooler): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+    (encoder): ResNetEncoder(
+      (stages): ModuleList(
+        (0): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (1): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (2): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (4): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (5): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (3): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+      )
+    )
+    (pooler): AdaptiveAvgPool2d(output_size=(1, 1))
+  )
+  (pre_branch): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=512, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+  )
+  (branch1): Linear(in_features=512, out_features=11, bias=True)
+  (loss_fn): MaskedDomainAdversarialLoss(
+    (branch1_loss_fn): InstanceWeightedCrossEntropyLoss(
+      (base_loss): CrossEntropyLoss()
+    )
+    (branch2_loss_fn): BCEWithLogitsLoss()
+  )
+  (grad_reverse): GradientReversal()
+  (branch2): Sequential(
+    (0): GradientReversal()
+    (1): Linear(in_features=512, out_features=1, bias=True)
+  )
+)
+[INFO|evaluation_funcs.py:99] 2025-11-17 01:55:27,937 >> Beginning evaluation of fold 0 (#1 out of 1)
+[INFO|evaluation_funcs.py:107] 2025-11-17 01:56:14,689 >> Instantiated eval dataset TwoLabelDataset, length 17778, which is file /data/DG_Test_set/test_dataset_Rotate_90deg.npz
+[INFO|training_args.py:1598] 2025-11-17 01:56:14,695 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:1598] 2025-11-17 01:56:14,695 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:2222] 2025-11-17 01:56:14,697 >> PyTorch: setting up devices
+[INFO|training_args.py:2222] 2025-11-17 01:56:14,697 >> PyTorch: setting up devices
+[INFO|evaluation_funcs.py:55] 2025-11-17 01:56:17,729 >> TrainingArguments(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=True,
+batch_eval_metrics=False,
+bf16=False,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=False,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=None,
+eval_strategy=IntervalStrategy.NO,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_revision=None,
+hub_strategy=HubStrategy.EVERY_SAVE,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=no,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+liger_kernel_config=None,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=trainer_output/runs/Nov17_01-56-14_b6d575939af8,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_kwargs={},
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3.0,
+optim=OptimizerNames.ADAMW_TORCH,
+optim_args=None,
+optim_target_modules=None,
+output_dir=trainer_output,
+overwrite_output_dir=False,
+parallelism_config=None,
+past_index=-1,
+per_device_eval_batch_size=32,
+per_device_train_batch_size=8,
+prediction_loss_only=False,
+project=huggingface,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=None,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=SaveStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+trackio_space_id=trackio,
+use_cpu=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+[INFO|trainer.py:4643] 2025-11-17 01:56:20,874 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4643] 2025-11-17 01:56:20,874 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-11-17 01:56:20,876 >>   Num examples = 17778
+[INFO|trainer.py:4645] 2025-11-17 01:56:20,876 >>   Num examples = 17778
+[INFO|trainer.py:4648] 2025-11-17 01:56:20,878 >>   Batch size = 32
+[INFO|trainer.py:4648] 2025-11-17 01:56:20,878 >>   Batch size = 32
+[INFO|evaluation_funcs.py:69] 2025-11-17 01:57:38,094 >> Metrics: {'eval_loss': 0.6436451077461243, 'eval_model_preparation_time': 0.0076, 'eval_accuracy_branch1': 0.4759253009337383, 'eval_precision_branch1': 0.44607384364785924, 'eval_recall_branch1': 0.4515091933978477, 'eval_f1_branch1': 0.43179493743829983, 'eval_accuracy_branch2': 0.9985375182810214, 'eval_precision_branch2': 0.5, 'eval_recall_branch2': 0.4992687591405107, 'eval_f1_branch2': 0.49963411201801294, 'eval_lambda': 0.0, 'eval_tn_branch2': 0, 'eval_fp_branch2': 0, 'eval_fn_branch2': 26, 'eval_tp_branch2': 17752, 'eval_loss_branch1': 0.0, 'eval_loss_branch2': 0.6436509490013123, 'eval_cm_branch1_actual0_pred0': 817, 'eval_cm_branch1_actual0_pred1': 1, 'eval_cm_branch1_actual0_pred2': 1, 'eval_cm_branch1_actual0_pred3': 70, 'eval_cm_branch1_actual0_pred4': 39, 'eval_cm_branch1_actual0_pred5': 91, 'eval_cm_branch1_actual0_pred6': 8, 'eval_cm_branch1_actual0_pred7': 0, 'eval_cm_branch1_actual0_pred8': 0, 'eval_cm_branch1_actual0_pred9': 2, 'eval_cm_branch1_actual0_pred10': 7, 'eval_cm_branch1_actual1_pred0': 32, 'eval_cm_branch1_actual1_pred1': 181, 'eval_cm_branch1_actual1_pred2': 487, 'eval_cm_branch1_actual1_pred3': 21, 'eval_cm_branch1_actual1_pred4': 33, 'eval_cm_branch1_actual1_pred5': 28, 'eval_cm_branch1_actual1_pred6': 0, 'eval_cm_branch1_actual1_pred7': 0, 'eval_cm_branch1_actual1_pred8': 0, 'eval_cm_branch1_actual1_pred9': 2, 'eval_cm_branch1_actual1_pred10': 0, 'eval_cm_branch1_actual2_pred0': 34, 'eval_cm_branch1_actual2_pred1': 250, 'eval_cm_branch1_actual2_pred2': 438, 'eval_cm_branch1_actual2_pred3': 34, 'eval_cm_branch1_actual2_pred4': 9, 'eval_cm_branch1_actual2_pred5': 28, 'eval_cm_branch1_actual2_pred6': 0, 'eval_cm_branch1_actual2_pred7': 0, 'eval_cm_branch1_actual2_pred8': 0, 'eval_cm_branch1_actual2_pred9': 0, 'eval_cm_branch1_actual2_pred10': 0, 'eval_cm_branch1_actual3_pred0': 3, 'eval_cm_branch1_actual3_pred1': 0, 'eval_cm_branch1_actual3_pred2': 0, 'eval_cm_branch1_actual3_pred3': 376, 'eval_cm_branch1_actual3_pred4': 4, 'eval_cm_branch1_actual3_pred5': 6, 'eval_cm_branch1_actual3_pred6': 12, 'eval_cm_branch1_actual3_pred7': 275, 'eval_cm_branch1_actual3_pred8': 9, 'eval_cm_branch1_actual3_pred9': 0, 'eval_cm_branch1_actual3_pred10': 100, 'eval_cm_branch1_actual4_pred0': 82, 'eval_cm_branch1_actual4_pred1': 14, 'eval_cm_branch1_actual4_pred2': 36, 'eval_cm_branch1_actual4_pred3': 45, 'eval_cm_branch1_actual4_pred4': 662, 'eval_cm_branch1_actual4_pred5': 1088, 'eval_cm_branch1_actual4_pred6': 0, 'eval_cm_branch1_actual4_pred7': 0, 'eval_cm_branch1_actual4_pred8': 5, 'eval_cm_branch1_actual4_pred9': 72, 'eval_cm_branch1_actual4_pred10': 60, 'eval_cm_branch1_actual5_pred0': 102, 'eval_cm_branch1_actual5_pred1': 7, 'eval_cm_branch1_actual5_pred2': 25, 'eval_cm_branch1_actual5_pred3': 78, 'eval_cm_branch1_actual5_pred4': 804, 'eval_cm_branch1_actual5_pred5': 763, 'eval_cm_branch1_actual5_pred6': 3, 'eval_cm_branch1_actual5_pred7': 0, 'eval_cm_branch1_actual5_pred8': 0, 'eval_cm_branch1_actual5_pred9': 87, 'eval_cm_branch1_actual5_pred10': 96, 'eval_cm_branch1_actual6_pred0': 2, 'eval_cm_branch1_actual6_pred1': 0, 'eval_cm_branch1_actual6_pred2': 0, 'eval_cm_branch1_actual6_pred3': 70, 'eval_cm_branch1_actual6_pred4': 0, 'eval_cm_branch1_actual6_pred5': 0, 'eval_cm_branch1_actual6_pred6': 2778, 'eval_cm_branch1_actual6_pred7': 208, 'eval_cm_branch1_actual6_pred8': 52, 'eval_cm_branch1_actual6_pred9': 24, 'eval_cm_branch1_actual6_pred10': 151, 'eval_cm_branch1_actual7_pred0': 0, 'eval_cm_branch1_actual7_pred1': 0, 'eval_cm_branch1_actual7_pred2': 0, 'eval_cm_branch1_actual7_pred3': 107, 'eval_cm_branch1_actual7_pred4': 0, 'eval_cm_branch1_actual7_pred5': 0, 'eval_cm_branch1_actual7_pred6': 125, 'eval_cm_branch1_actual7_pred7': 689, 'eval_cm_branch1_actual7_pred8': 798, 'eval_cm_branch1_actual7_pred9': 0, 'eval_cm_branch1_actual7_pred10': 28, 'eval_cm_branch1_actual8_pred0': 0, 'eval_cm_branch1_actual8_pred1': 0, 'eval_cm_branch1_actual8_pred2': 0, 'eval_cm_branch1_actual8_pred3': 159, 'eval_cm_branch1_actual8_pred4': 0, 'eval_cm_branch1_actual8_pred5': 0, 'eval_cm_branch1_actual8_pred6': 200, 'eval_cm_branch1_actual8_pred7': 348, 'eval_cm_branch1_actual8_pred8': 1106, 'eval_cm_branch1_actual8_pred9': 0, 'eval_cm_branch1_actual8_pred10': 0, 'eval_cm_branch1_actual9_pred0': 271, 'eval_cm_branch1_actual9_pred1': 3, 'eval_cm_branch1_actual9_pred2': 4, 'eval_cm_branch1_actual9_pred3': 1, 'eval_cm_branch1_actual9_pred4': 609, 'eval_cm_branch1_actual9_pred5': 464, 'eval_cm_branch1_actual9_pred6': 49, 'eval_cm_branch1_actual9_pred7': 1, 'eval_cm_branch1_actual9_pred8': 3, 'eval_cm_branch1_actual9_pred9': 130, 'eval_cm_branch1_actual9_pred10': 87, 'eval_cm_branch1_actual10_pred0': 151, 'eval_cm_branch1_actual10_pred1': 2, 'eval_cm_branch1_actual10_pred2': 10, 'eval_cm_branch1_actual10_pred3': 135, 'eval_cm_branch1_actual10_pred4': 151, 'eval_cm_branch1_actual10_pred5': 591, 'eval_cm_branch1_actual10_pred6': 214, 'eval_cm_branch1_actual10_pred7': 0, 'eval_cm_branch1_actual10_pred8': 28, 'eval_cm_branch1_actual10_pred9': 81, 'eval_cm_branch1_actual10_pred10': 521, 'eval_runtime': 77.2077, 'eval_samples_per_second': 230.262, 'eval_steps_per_second': 7.201}
+[INFO|evaluation_funcs.py:96] 2025-11-17 01:57:50,353 >> Instantiated model ResNet50DANN from /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_1_2025-11-11_06-44-35/model.safetensors. Summary:
+ResNet50DANN(
+  (resnet): ResNetModel(
+    (embedder): ResNetEmbeddings(
+      (embedder): ResNetConvLayer(
+        (convolution): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activation): ReLU()
+      )
+      (pooler): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+    (encoder): ResNetEncoder(
+      (stages): ModuleList(
+        (0): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (1): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (2): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (4): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (5): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (3): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+      )
+    )
+    (pooler): AdaptiveAvgPool2d(output_size=(1, 1))
+  )
+  (pre_branch): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=512, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+  )
+  (branch1): Linear(in_features=512, out_features=11, bias=True)
+  (loss_fn): MaskedDomainAdversarialLoss(
+    (branch1_loss_fn): InstanceWeightedCrossEntropyLoss(
+      (base_loss): CrossEntropyLoss()
+    )
+    (branch2_loss_fn): BCEWithLogitsLoss()
+  )
+  (grad_reverse): GradientReversal()
+  (branch2): Sequential(
+    (0): GradientReversal()
+    (1): Linear(in_features=512, out_features=1, bias=True)
+  )
+)
+[INFO|evaluation_funcs.py:99] 2025-11-17 01:57:50,356 >> Beginning evaluation of fold 0 (#1 out of 1)
+[INFO|evaluation_funcs.py:107] 2025-11-17 01:58:39,036 >> Instantiated eval dataset TwoLabelDataset, length 17778, which is file /data/DG_Test_set/test_dataset_Rotate_90deg.npz
+[INFO|training_args.py:1598] 2025-11-17 01:58:39,040 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:1598] 2025-11-17 01:58:39,040 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:2222] 2025-11-17 01:58:39,042 >> PyTorch: setting up devices
+[INFO|training_args.py:2222] 2025-11-17 01:58:39,042 >> PyTorch: setting up devices
+[INFO|evaluation_funcs.py:55] 2025-11-17 01:58:39,097 >> TrainingArguments(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=True,
+batch_eval_metrics=False,
+bf16=False,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=False,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=None,
+eval_strategy=IntervalStrategy.NO,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_revision=None,
+hub_strategy=HubStrategy.EVERY_SAVE,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=no,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+liger_kernel_config=None,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=trainer_output/runs/Nov17_01-58-39_b6d575939af8,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_kwargs={},
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3.0,
+optim=OptimizerNames.ADAMW_TORCH,
+optim_args=None,
+optim_target_modules=None,
+output_dir=trainer_output,
+overwrite_output_dir=False,
+parallelism_config=None,
+past_index=-1,
+per_device_eval_batch_size=32,
+per_device_train_batch_size=8,
+prediction_loss_only=False,
+project=huggingface,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=None,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=SaveStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+trackio_space_id=trackio,
+use_cpu=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+[INFO|trainer.py:4643] 2025-11-17 01:58:39,404 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4643] 2025-11-17 01:58:39,404 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-11-17 01:58:39,406 >>   Num examples = 17778
+[INFO|trainer.py:4645] 2025-11-17 01:58:39,406 >>   Num examples = 17778
+[INFO|trainer.py:4648] 2025-11-17 01:58:39,408 >>   Batch size = 32
+[INFO|trainer.py:4648] 2025-11-17 01:58:39,408 >>   Batch size = 32
+[INFO|evaluation_funcs.py:69] 2025-11-17 02:04:34,970 >> Metrics: {'eval_loss': 0.6456623077392578, 'eval_model_preparation_time': 0.0103, 'eval_accuracy_branch1': 0.4795815052311846, 'eval_precision_branch1': 0.46651950191194924, 'eval_recall_branch1': 0.4438365595386781, 'eval_f1_branch1': 0.43561995963817385, 'eval_accuracy_branch2': 1.0, 'eval_precision_branch2': 1.0, 'eval_recall_branch2': 1.0, 'eval_f1_branch2': 1.0, 'eval_lambda': 0.0, 'eval_tn_branch2': 0, 'eval_fp_branch2': 0, 'eval_fn_branch2': 0, 'eval_tp_branch2': 17778, 'eval_loss_branch1': 0.0, 'eval_loss_branch2': 0.6456678509712219, 'eval_cm_branch1_actual0_pred0': 815, 'eval_cm_branch1_actual0_pred1': 1, 'eval_cm_branch1_actual0_pred2': 0, 'eval_cm_branch1_actual0_pred3': 22, 'eval_cm_branch1_actual0_pred4': 39, 'eval_cm_branch1_actual0_pred5': 133, 'eval_cm_branch1_actual0_pred6': 8, 'eval_cm_branch1_actual0_pred7': 0, 'eval_cm_branch1_actual0_pred8': 0, 'eval_cm_branch1_actual0_pred9': 11, 'eval_cm_branch1_actual0_pred10': 7, 'eval_cm_branch1_actual1_pred0': 11, 'eval_cm_branch1_actual1_pred1': 155, 'eval_cm_branch1_actual1_pred2': 498, 'eval_cm_branch1_actual1_pred3': 2, 'eval_cm_branch1_actual1_pred4': 64, 'eval_cm_branch1_actual1_pred5': 53, 'eval_cm_branch1_actual1_pred6': 0, 'eval_cm_branch1_actual1_pred7': 0, 'eval_cm_branch1_actual1_pred8': 0, 'eval_cm_branch1_actual1_pred9': 1, 'eval_cm_branch1_actual1_pred10': 0, 'eval_cm_branch1_actual2_pred0': 19, 'eval_cm_branch1_actual2_pred1': 279, 'eval_cm_branch1_actual2_pred2': 415, 'eval_cm_branch1_actual2_pred3': 0, 'eval_cm_branch1_actual2_pred4': 8, 'eval_cm_branch1_actual2_pred5': 72, 'eval_cm_branch1_actual2_pred6': 0, 'eval_cm_branch1_actual2_pred7': 0, 'eval_cm_branch1_actual2_pred8': 0, 'eval_cm_branch1_actual2_pred9': 0, 'eval_cm_branch1_actual2_pred10': 0, 'eval_cm_branch1_actual3_pred0': 1, 'eval_cm_branch1_actual3_pred1': 0, 'eval_cm_branch1_actual3_pred2': 0, 'eval_cm_branch1_actual3_pred3': 314, 'eval_cm_branch1_actual3_pred4': 8, 'eval_cm_branch1_actual3_pred5': 9, 'eval_cm_branch1_actual3_pred6': 31, 'eval_cm_branch1_actual3_pred7': 328, 'eval_cm_branch1_actual3_pred8': 11, 'eval_cm_branch1_actual3_pred9': 1, 'eval_cm_branch1_actual3_pred10': 82, 'eval_cm_branch1_actual4_pred0': 65, 'eval_cm_branch1_actual4_pred1': 4, 'eval_cm_branch1_actual4_pred2': 48, 'eval_cm_branch1_actual4_pred3': 2, 'eval_cm_branch1_actual4_pred4': 694, 'eval_cm_branch1_actual4_pred5': 1160, 'eval_cm_branch1_actual4_pred6': 0, 'eval_cm_branch1_actual4_pred7': 0, 'eval_cm_branch1_actual4_pred8': 1, 'eval_cm_branch1_actual4_pred9': 73, 'eval_cm_branch1_actual4_pred10': 17, 'eval_cm_branch1_actual5_pred0': 126, 'eval_cm_branch1_actual5_pred1': 5, 'eval_cm_branch1_actual5_pred2': 14, 'eval_cm_branch1_actual5_pred3': 29, 'eval_cm_branch1_actual5_pred4': 750, 'eval_cm_branch1_actual5_pred5': 857, 'eval_cm_branch1_actual5_pred6': 5, 'eval_cm_branch1_actual5_pred7': 0, 'eval_cm_branch1_actual5_pred8': 0, 'eval_cm_branch1_actual5_pred9': 126, 'eval_cm_branch1_actual5_pred10': 53, 'eval_cm_branch1_actual6_pred0': 0, 'eval_cm_branch1_actual6_pred1': 0, 'eval_cm_branch1_actual6_pred2': 0, 'eval_cm_branch1_actual6_pred3': 49, 'eval_cm_branch1_actual6_pred4': 0, 'eval_cm_branch1_actual6_pred5': 0, 'eval_cm_branch1_actual6_pred6': 2943, 'eval_cm_branch1_actual6_pred7': 185, 'eval_cm_branch1_actual6_pred8': 32, 'eval_cm_branch1_actual6_pred9': 11, 'eval_cm_branch1_actual6_pred10': 65, 'eval_cm_branch1_actual7_pred0': 0, 'eval_cm_branch1_actual7_pred1': 0, 'eval_cm_branch1_actual7_pred2': 0, 'eval_cm_branch1_actual7_pred3': 77, 'eval_cm_branch1_actual7_pred4': 1, 'eval_cm_branch1_actual7_pred5': 0, 'eval_cm_branch1_actual7_pred6': 191, 'eval_cm_branch1_actual7_pred7': 729, 'eval_cm_branch1_actual7_pred8': 739, 'eval_cm_branch1_actual7_pred9': 0, 'eval_cm_branch1_actual7_pred10': 10, 'eval_cm_branch1_actual8_pred0': 0, 'eval_cm_branch1_actual8_pred1': 0, 'eval_cm_branch1_actual8_pred2': 0, 'eval_cm_branch1_actual8_pred3': 98, 'eval_cm_branch1_actual8_pred4': 0, 'eval_cm_branch1_actual8_pred5': 0, 'eval_cm_branch1_actual8_pred6': 397, 'eval_cm_branch1_actual8_pred7': 435, 'eval_cm_branch1_actual8_pred8': 883, 'eval_cm_branch1_actual8_pred9': 0, 'eval_cm_branch1_actual8_pred10': 0, 'eval_cm_branch1_actual9_pred0': 303, 'eval_cm_branch1_actual9_pred1': 0, 'eval_cm_branch1_actual9_pred2': 0, 'eval_cm_branch1_actual9_pred3': 0, 'eval_cm_branch1_actual9_pred4': 568, 'eval_cm_branch1_actual9_pred5': 405, 'eval_cm_branch1_actual9_pred6': 58, 'eval_cm_branch1_actual9_pred7': 4, 'eval_cm_branch1_actual9_pred8': 1, 'eval_cm_branch1_actual9_pred9': 224, 'eval_cm_branch1_actual9_pred10': 59, 'eval_cm_branch1_actual10_pred0': 78, 'eval_cm_branch1_actual10_pred1': 3, 'eval_cm_branch1_actual10_pred2': 0, 'eval_cm_branch1_actual10_pred3': 47, 'eval_cm_branch1_actual10_pred4': 103, 'eval_cm_branch1_actual10_pred5': 750, 'eval_cm_branch1_actual10_pred6': 260, 'eval_cm_branch1_actual10_pred7': 0, 'eval_cm_branch1_actual10_pred8': 23, 'eval_cm_branch1_actual10_pred9': 123, 'eval_cm_branch1_actual10_pred10': 497, 'eval_runtime': 355.5626, 'eval_samples_per_second': 50.0, 'eval_steps_per_second': 1.564}
+[INFO|evaluation_funcs.py:96] 2025-11-17 02:04:41,052 >> Instantiated model ResNet50DANN from /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_2_2025-11-11_09-26-56/model.safetensors. Summary:
+ResNet50DANN(
+  (resnet): ResNetModel(
+    (embedder): ResNetEmbeddings(
+      (embedder): ResNetConvLayer(
+        (convolution): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activation): ReLU()
+      )
+      (pooler): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+    (encoder): ResNetEncoder(
+      (stages): ModuleList(
+        (0): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (1): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (2): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (4): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (5): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (3): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+      )
+    )
+    (pooler): AdaptiveAvgPool2d(output_size=(1, 1))
+  )
+  (pre_branch): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=512, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+  )
+  (branch1): Linear(in_features=512, out_features=11, bias=True)
+  (loss_fn): MaskedDomainAdversarialLoss(
+    (branch1_loss_fn): InstanceWeightedCrossEntropyLoss(
+      (base_loss): CrossEntropyLoss()
+    )
+    (branch2_loss_fn): BCEWithLogitsLoss()
+  )
+  (grad_reverse): GradientReversal()
+  (branch2): Sequential(
+    (0): GradientReversal()
+    (1): Linear(in_features=512, out_features=1, bias=True)
+  )
+)
+[INFO|evaluation_funcs.py:99] 2025-11-17 02:04:41,054 >> Beginning evaluation of fold 0 (#1 out of 1)
+[INFO|evaluation_funcs.py:107] 2025-11-17 02:05:18,193 >> Instantiated eval dataset TwoLabelDataset, length 17778, which is file /data/DG_Test_set/test_dataset_Rotate_90deg.npz
+[INFO|training_args.py:1598] 2025-11-17 02:05:18,198 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:1598] 2025-11-17 02:05:18,198 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:2222] 2025-11-17 02:05:18,200 >> PyTorch: setting up devices
+[INFO|training_args.py:2222] 2025-11-17 02:05:18,200 >> PyTorch: setting up devices
+[INFO|evaluation_funcs.py:55] 2025-11-17 02:05:18,251 >> TrainingArguments(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=True,
+batch_eval_metrics=False,
+bf16=False,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=False,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=None,
+eval_strategy=IntervalStrategy.NO,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_revision=None,
+hub_strategy=HubStrategy.EVERY_SAVE,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=no,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+liger_kernel_config=None,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=trainer_output/runs/Nov17_02-05-18_b6d575939af8,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_kwargs={},
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3.0,
+optim=OptimizerNames.ADAMW_TORCH,
+optim_args=None,
+optim_target_modules=None,
+output_dir=trainer_output,
+overwrite_output_dir=False,
+parallelism_config=None,
+past_index=-1,
+per_device_eval_batch_size=32,
+per_device_train_batch_size=8,
+prediction_loss_only=False,
+project=huggingface,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=None,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=SaveStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+trackio_space_id=trackio,
+use_cpu=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+[INFO|trainer.py:4643] 2025-11-17 02:05:18,489 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4643] 2025-11-17 02:05:18,489 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-11-17 02:05:18,491 >>   Num examples = 17778
+[INFO|trainer.py:4645] 2025-11-17 02:05:18,491 >>   Num examples = 17778
+[INFO|trainer.py:4648] 2025-11-17 02:05:18,493 >>   Batch size = 32
+[INFO|trainer.py:4648] 2025-11-17 02:05:18,493 >>   Batch size = 32
+[INFO|evaluation_funcs.py:69] 2025-11-17 02:11:12,821 >> Metrics: {'eval_loss': 0.6671139001846313, 'eval_model_preparation_time': 0.0053, 'eval_accuracy_branch1': 0.4578130273371583, 'eval_precision_branch1': 0.4512829689971421, 'eval_recall_branch1': 0.4152260182364556, 'eval_f1_branch1': 0.4092666754542972, 'eval_accuracy_branch2': 1.0, 'eval_precision_branch2': 1.0, 'eval_recall_branch2': 1.0, 'eval_f1_branch2': 1.0, 'eval_lambda': 0.0, 'eval_tn_branch2': 0, 'eval_fp_branch2': 0, 'eval_fn_branch2': 0, 'eval_tp_branch2': 17778, 'eval_loss_branch1': 0.0, 'eval_loss_branch2': 0.6671158075332642, 'eval_cm_branch1_actual0_pred0': 782, 'eval_cm_branch1_actual0_pred1': 1, 'eval_cm_branch1_actual0_pred2': 2, 'eval_cm_branch1_actual0_pred3': 38, 'eval_cm_branch1_actual0_pred4': 48, 'eval_cm_branch1_actual0_pred5': 143, 'eval_cm_branch1_actual0_pred6': 9, 'eval_cm_branch1_actual0_pred7': 0, 'eval_cm_branch1_actual0_pred8': 0, 'eval_cm_branch1_actual0_pred9': 7, 'eval_cm_branch1_actual0_pred10': 6, 'eval_cm_branch1_actual1_pred0': 5, 'eval_cm_branch1_actual1_pred1': 147, 'eval_cm_branch1_actual1_pred2': 535, 'eval_cm_branch1_actual1_pred3': 0, 'eval_cm_branch1_actual1_pred4': 74, 'eval_cm_branch1_actual1_pred5': 23, 'eval_cm_branch1_actual1_pred6': 0, 'eval_cm_branch1_actual1_pred7': 0, 'eval_cm_branch1_actual1_pred8': 0, 'eval_cm_branch1_actual1_pred9': 0, 'eval_cm_branch1_actual1_pred10': 0, 'eval_cm_branch1_actual2_pred0': 14, 'eval_cm_branch1_actual2_pred1': 288, 'eval_cm_branch1_actual2_pred2': 388, 'eval_cm_branch1_actual2_pred3': 0, 'eval_cm_branch1_actual2_pred4': 13, 'eval_cm_branch1_actual2_pred5': 90, 'eval_cm_branch1_actual2_pred6': 0, 'eval_cm_branch1_actual2_pred7': 0, 'eval_cm_branch1_actual2_pred8': 0, 'eval_cm_branch1_actual2_pred9': 0, 'eval_cm_branch1_actual2_pred10': 0, 'eval_cm_branch1_actual3_pred0': 2, 'eval_cm_branch1_actual3_pred1': 0, 'eval_cm_branch1_actual3_pred2': 0, 'eval_cm_branch1_actual3_pred3': 223, 'eval_cm_branch1_actual3_pred4': 11, 'eval_cm_branch1_actual3_pred5': 14, 'eval_cm_branch1_actual3_pred6': 40, 'eval_cm_branch1_actual3_pred7': 309, 'eval_cm_branch1_actual3_pred8': 4, 'eval_cm_branch1_actual3_pred9': 0, 'eval_cm_branch1_actual3_pred10': 182, 'eval_cm_branch1_actual4_pred0': 48, 'eval_cm_branch1_actual4_pred1': 2, 'eval_cm_branch1_actual4_pred2': 43, 'eval_cm_branch1_actual4_pred3': 0, 'eval_cm_branch1_actual4_pred4': 746, 'eval_cm_branch1_actual4_pred5': 1178, 'eval_cm_branch1_actual4_pred6': 0, 'eval_cm_branch1_actual4_pred7': 0, 'eval_cm_branch1_actual4_pred8': 0, 'eval_cm_branch1_actual4_pred9': 35, 'eval_cm_branch1_actual4_pred10': 12, 'eval_cm_branch1_actual5_pred0': 83, 'eval_cm_branch1_actual5_pred1': 8, 'eval_cm_branch1_actual5_pred2': 19, 'eval_cm_branch1_actual5_pred3': 20, 'eval_cm_branch1_actual5_pred4': 780, 'eval_cm_branch1_actual5_pred5': 917, 'eval_cm_branch1_actual5_pred6': 0, 'eval_cm_branch1_actual5_pred7': 0, 'eval_cm_branch1_actual5_pred8': 0, 'eval_cm_branch1_actual5_pred9': 115, 'eval_cm_branch1_actual5_pred10': 23, 'eval_cm_branch1_actual6_pred0': 0, 'eval_cm_branch1_actual6_pred1': 0, 'eval_cm_branch1_actual6_pred2': 0, 'eval_cm_branch1_actual6_pred3': 26, 'eval_cm_branch1_actual6_pred4': 0, 'eval_cm_branch1_actual6_pred5': 0, 'eval_cm_branch1_actual6_pred6': 2925, 'eval_cm_branch1_actual6_pred7': 206, 'eval_cm_branch1_actual6_pred8': 45, 'eval_cm_branch1_actual6_pred9': 15, 'eval_cm_branch1_actual6_pred10': 68, 'eval_cm_branch1_actual7_pred0': 0, 'eval_cm_branch1_actual7_pred1': 0, 'eval_cm_branch1_actual7_pred2': 0, 'eval_cm_branch1_actual7_pred3': 89, 'eval_cm_branch1_actual7_pred4': 0, 'eval_cm_branch1_actual7_pred5': 0, 'eval_cm_branch1_actual7_pred6': 402, 'eval_cm_branch1_actual7_pred7': 807, 'eval_cm_branch1_actual7_pred8': 438, 'eval_cm_branch1_actual7_pred9': 0, 'eval_cm_branch1_actual7_pred10': 11, 'eval_cm_branch1_actual8_pred0': 0, 'eval_cm_branch1_actual8_pred1': 0, 'eval_cm_branch1_actual8_pred2': 0, 'eval_cm_branch1_actual8_pred3': 129, 'eval_cm_branch1_actual8_pred4': 0, 'eval_cm_branch1_actual8_pred5': 0, 'eval_cm_branch1_actual8_pred6': 654, 'eval_cm_branch1_actual8_pred7': 516, 'eval_cm_branch1_actual8_pred8': 514, 'eval_cm_branch1_actual8_pred9': 0, 'eval_cm_branch1_actual8_pred10': 0, 'eval_cm_branch1_actual9_pred0': 224, 'eval_cm_branch1_actual9_pred1': 0, 'eval_cm_branch1_actual9_pred2': 0, 'eval_cm_branch1_actual9_pred3': 0, 'eval_cm_branch1_actual9_pred4': 619, 'eval_cm_branch1_actual9_pred5': 448, 'eval_cm_branch1_actual9_pred6': 32, 'eval_cm_branch1_actual9_pred7': 0, 'eval_cm_branch1_actual9_pred8': 0, 'eval_cm_branch1_actual9_pred9': 252, 'eval_cm_branch1_actual9_pred10': 47, 'eval_cm_branch1_actual10_pred0': 73, 'eval_cm_branch1_actual10_pred1': 1, 'eval_cm_branch1_actual10_pred2': 0, 'eval_cm_branch1_actual10_pred3': 31, 'eval_cm_branch1_actual10_pred4': 117, 'eval_cm_branch1_actual10_pred5': 847, 'eval_cm_branch1_actual10_pred6': 241, 'eval_cm_branch1_actual10_pred7': 0, 'eval_cm_branch1_actual10_pred8': 20, 'eval_cm_branch1_actual10_pred9': 116, 'eval_cm_branch1_actual10_pred10': 438, 'eval_runtime': 354.3271, 'eval_samples_per_second': 50.174, 'eval_steps_per_second': 1.569}
+[INFO|evaluation_funcs.py:96] 2025-11-17 02:11:19,074 >> Instantiated model ResNet50DANN from /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_3_2025-11-11_12-08-36/model.safetensors. Summary:
+ResNet50DANN(
+  (resnet): ResNetModel(
+    (embedder): ResNetEmbeddings(
+      (embedder): ResNetConvLayer(
+        (convolution): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activation): ReLU()
+      )
+      (pooler): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+    (encoder): ResNetEncoder(
+      (stages): ModuleList(
+        (0): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (1): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (2): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (4): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (5): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (3): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+      )
+    )
+    (pooler): AdaptiveAvgPool2d(output_size=(1, 1))
+  )
+  (pre_branch): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=512, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+  )
+  (branch1): Linear(in_features=512, out_features=11, bias=True)
+  (loss_fn): MaskedDomainAdversarialLoss(
+    (branch1_loss_fn): InstanceWeightedCrossEntropyLoss(
+      (base_loss): CrossEntropyLoss()
+    )
+    (branch2_loss_fn): BCEWithLogitsLoss()
+  )
+  (grad_reverse): GradientReversal()
+  (branch2): Sequential(
+    (0): GradientReversal()
+    (1): Linear(in_features=512, out_features=1, bias=True)
+  )
+)
+[INFO|evaluation_funcs.py:99] 2025-11-17 02:11:19,076 >> Beginning evaluation of fold 0 (#1 out of 1)
+[INFO|evaluation_funcs.py:107] 2025-11-17 02:11:59,683 >> Instantiated eval dataset TwoLabelDataset, length 17778, which is file /data/DG_Test_set/test_dataset_Rotate_90deg.npz
+[INFO|training_args.py:1598] 2025-11-17 02:11:59,687 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:1598] 2025-11-17 02:11:59,687 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:2222] 2025-11-17 02:11:59,689 >> PyTorch: setting up devices
+[INFO|training_args.py:2222] 2025-11-17 02:11:59,689 >> PyTorch: setting up devices
+[INFO|evaluation_funcs.py:55] 2025-11-17 02:11:59,741 >> TrainingArguments(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=True,
+batch_eval_metrics=False,
+bf16=False,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=False,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=None,
+eval_strategy=IntervalStrategy.NO,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_revision=None,
+hub_strategy=HubStrategy.EVERY_SAVE,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=no,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+liger_kernel_config=None,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=trainer_output/runs/Nov17_02-11-59_b6d575939af8,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_kwargs={},
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3.0,
+optim=OptimizerNames.ADAMW_TORCH,
+optim_args=None,
+optim_target_modules=None,
+output_dir=trainer_output,
+overwrite_output_dir=False,
+parallelism_config=None,
+past_index=-1,
+per_device_eval_batch_size=32,
+per_device_train_batch_size=8,
+prediction_loss_only=False,
+project=huggingface,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=None,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=SaveStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+trackio_space_id=trackio,
+use_cpu=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+[INFO|trainer.py:4643] 2025-11-17 02:11:59,983 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4643] 2025-11-17 02:11:59,983 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-11-17 02:11:59,984 >>   Num examples = 17778
+[INFO|trainer.py:4645] 2025-11-17 02:11:59,984 >>   Num examples = 17778
+[INFO|trainer.py:4648] 2025-11-17 02:11:59,986 >>   Batch size = 32
+[INFO|trainer.py:4648] 2025-11-17 02:11:59,986 >>   Batch size = 32
+[INFO|evaluation_funcs.py:69] 2025-11-17 02:17:54,201 >> Metrics: {'eval_loss': 0.6966918110847473, 'eval_model_preparation_time': 0.0041, 'eval_accuracy_branch1': 0.47390032624592193, 'eval_precision_branch1': 0.4621798317174578, 'eval_recall_branch1': 0.43290805166605806, 'eval_f1_branch1': 0.42743445767383614, 'eval_accuracy_branch2': 0.4049386882663967, 'eval_precision_branch2': 0.5, 'eval_recall_branch2': 0.20246934413319834, 'eval_f1_branch2': 0.2882251671537815, 'eval_lambda': 0.0, 'eval_tn_branch2': 0, 'eval_fp_branch2': 0, 'eval_fn_branch2': 10579, 'eval_tp_branch2': 7199, 'eval_loss_branch1': 0.0, 'eval_loss_branch2': 0.6966906189918518, 'eval_cm_branch1_actual0_pred0': 847, 'eval_cm_branch1_actual0_pred1': 0, 'eval_cm_branch1_actual0_pred2': 1, 'eval_cm_branch1_actual0_pred3': 2, 'eval_cm_branch1_actual0_pred4': 47, 'eval_cm_branch1_actual0_pred5': 127, 'eval_cm_branch1_actual0_pred6': 0, 'eval_cm_branch1_actual0_pred7': 0, 'eval_cm_branch1_actual0_pred8': 0, 'eval_cm_branch1_actual0_pred9': 6, 'eval_cm_branch1_actual0_pred10': 6, 'eval_cm_branch1_actual1_pred0': 10, 'eval_cm_branch1_actual1_pred1': 123, 'eval_cm_branch1_actual1_pred2': 530, 'eval_cm_branch1_actual1_pred3': 0, 'eval_cm_branch1_actual1_pred4': 78, 'eval_cm_branch1_actual1_pred5': 43, 'eval_cm_branch1_actual1_pred6': 0, 'eval_cm_branch1_actual1_pred7': 0, 'eval_cm_branch1_actual1_pred8': 0, 'eval_cm_branch1_actual1_pred9': 0, 'eval_cm_branch1_actual1_pred10': 0, 'eval_cm_branch1_actual2_pred0': 19, 'eval_cm_branch1_actual2_pred1': 258, 'eval_cm_branch1_actual2_pred2': 413, 'eval_cm_branch1_actual2_pred3': 0, 'eval_cm_branch1_actual2_pred4': 15, 'eval_cm_branch1_actual2_pred5': 88, 'eval_cm_branch1_actual2_pred6': 0, 'eval_cm_branch1_actual2_pred7': 0, 'eval_cm_branch1_actual2_pred8': 0, 'eval_cm_branch1_actual2_pred9': 0, 'eval_cm_branch1_actual2_pred10': 0, 'eval_cm_branch1_actual3_pred0': 0, 'eval_cm_branch1_actual3_pred1': 0, 'eval_cm_branch1_actual3_pred2': 0, 'eval_cm_branch1_actual3_pred3': 211, 'eval_cm_branch1_actual3_pred4': 8, 'eval_cm_branch1_actual3_pred5': 7, 'eval_cm_branch1_actual3_pred6': 7, 'eval_cm_branch1_actual3_pred7': 299, 'eval_cm_branch1_actual3_pred8': 1, 'eval_cm_branch1_actual3_pred9': 0, 'eval_cm_branch1_actual3_pred10': 252, 'eval_cm_branch1_actual4_pred0': 54, 'eval_cm_branch1_actual4_pred1': 1, 'eval_cm_branch1_actual4_pred2': 48, 'eval_cm_branch1_actual4_pred3': 0, 'eval_cm_branch1_actual4_pred4': 755, 'eval_cm_branch1_actual4_pred5': 1172, 'eval_cm_branch1_actual4_pred6': 0, 'eval_cm_branch1_actual4_pred7': 0, 'eval_cm_branch1_actual4_pred8': 0, 'eval_cm_branch1_actual4_pred9': 27, 'eval_cm_branch1_actual4_pred10': 7, 'eval_cm_branch1_actual5_pred0': 95, 'eval_cm_branch1_actual5_pred1': 6, 'eval_cm_branch1_actual5_pred2': 10, 'eval_cm_branch1_actual5_pred3': 0, 'eval_cm_branch1_actual5_pred4': 826, 'eval_cm_branch1_actual5_pred5': 870, 'eval_cm_branch1_actual5_pred6': 0, 'eval_cm_branch1_actual5_pred7': 0, 'eval_cm_branch1_actual5_pred8': 0, 'eval_cm_branch1_actual5_pred9': 143, 'eval_cm_branch1_actual5_pred10': 15, 'eval_cm_branch1_actual6_pred0': 0, 'eval_cm_branch1_actual6_pred1': 0, 'eval_cm_branch1_actual6_pred2': 0, 'eval_cm_branch1_actual6_pred3': 37, 'eval_cm_branch1_actual6_pred4': 0, 'eval_cm_branch1_actual6_pred5': 1, 'eval_cm_branch1_actual6_pred6': 2856, 'eval_cm_branch1_actual6_pred7': 200, 'eval_cm_branch1_actual6_pred8': 29, 'eval_cm_branch1_actual6_pred9': 22, 'eval_cm_branch1_actual6_pred10': 140, 'eval_cm_branch1_actual7_pred0': 0, 'eval_cm_branch1_actual7_pred1': 0, 'eval_cm_branch1_actual7_pred2': 0, 'eval_cm_branch1_actual7_pred3': 96, 'eval_cm_branch1_actual7_pred4': 0, 'eval_cm_branch1_actual7_pred5': 0, 'eval_cm_branch1_actual7_pred6': 317, 'eval_cm_branch1_actual7_pred7': 850, 'eval_cm_branch1_actual7_pred8': 475, 'eval_cm_branch1_actual7_pred9': 0, 'eval_cm_branch1_actual7_pred10': 9, 'eval_cm_branch1_actual8_pred0': 0, 'eval_cm_branch1_actual8_pred1': 0, 'eval_cm_branch1_actual8_pred2': 0, 'eval_cm_branch1_actual8_pred3': 97, 'eval_cm_branch1_actual8_pred4': 0, 'eval_cm_branch1_actual8_pred5': 0, 'eval_cm_branch1_actual8_pred6': 376, 'eval_cm_branch1_actual8_pred7': 557, 'eval_cm_branch1_actual8_pred8': 782, 'eval_cm_branch1_actual8_pred9': 0, 'eval_cm_branch1_actual8_pred10': 1, 'eval_cm_branch1_actual9_pred0': 162, 'eval_cm_branch1_actual9_pred1': 0, 'eval_cm_branch1_actual9_pred2': 0, 'eval_cm_branch1_actual9_pred3': 0, 'eval_cm_branch1_actual9_pred4': 730, 'eval_cm_branch1_actual9_pred5': 354, 'eval_cm_branch1_actual9_pred6': 45, 'eval_cm_branch1_actual9_pred7': 0, 'eval_cm_branch1_actual9_pred8': 0, 'eval_cm_branch1_actual9_pred9': 245, 'eval_cm_branch1_actual9_pred10': 86, 'eval_cm_branch1_actual10_pred0': 84, 'eval_cm_branch1_actual10_pred1': 2, 'eval_cm_branch1_actual10_pred2': 1, 'eval_cm_branch1_actual10_pred3': 61, 'eval_cm_branch1_actual10_pred4': 107, 'eval_cm_branch1_actual10_pred5': 789, 'eval_cm_branch1_actual10_pred6': 252, 'eval_cm_branch1_actual10_pred7': 17, 'eval_cm_branch1_actual10_pred8': 9, 'eval_cm_branch1_actual10_pred9': 89, 'eval_cm_branch1_actual10_pred10': 473, 'eval_runtime': 354.2119, 'eval_samples_per_second': 50.19, 'eval_steps_per_second': 1.57}
+[INFO|evaluation_funcs.py:96] 2025-11-17 02:18:00,085 >> Instantiated model ResNet50DANN from /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_4_2025-11-11_14-50-27/model.safetensors. Summary:
+ResNet50DANN(
+  (resnet): ResNetModel(
+    (embedder): ResNetEmbeddings(
+      (embedder): ResNetConvLayer(
+        (convolution): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+        (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (activation): ReLU()
+      )
+      (pooler): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    )
+    (encoder): ResNetEncoder(
+      (stages): ModuleList(
+        (0): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (1): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (2): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (3): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (4): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (5): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+        (3): ResNetStage(
+          (layers): Sequential(
+            (0): ResNetBottleNeckLayer(
+              (shortcut): ResNetShortCut(
+                (convolution): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+                (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+              )
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (1): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+            (2): ResNetBottleNeckLayer(
+              (shortcut): Identity()
+              (layer): Sequential(
+                (0): ResNetConvLayer(
+                  (convolution): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (1): ResNetConvLayer(
+                  (convolution): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): ReLU()
+                )
+                (2): ResNetConvLayer(
+                  (convolution): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                  (normalization): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+                  (activation): Identity()
+                )
+              )
+              (activation): ReLU()
+            )
+          )
+        )
+      )
+    )
+    (pooler): AdaptiveAvgPool2d(output_size=(1, 1))
+  )
+  (pre_branch): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=2048, out_features=512, bias=True)
+    (2): ReLU()
+    (3): Dropout(p=0.5, inplace=False)
+  )
+  (branch1): Linear(in_features=512, out_features=11, bias=True)
+  (loss_fn): MaskedDomainAdversarialLoss(
+    (branch1_loss_fn): InstanceWeightedCrossEntropyLoss(
+      (base_loss): CrossEntropyLoss()
+    )
+    (branch2_loss_fn): BCEWithLogitsLoss()
+  )
+  (grad_reverse): GradientReversal()
+  (branch2): Sequential(
+    (0): GradientReversal()
+    (1): Linear(in_features=512, out_features=1, bias=True)
+  )
+)
+[INFO|evaluation_funcs.py:99] 2025-11-17 02:18:00,087 >> Beginning evaluation of fold 0 (#1 out of 1)
+[INFO|evaluation_funcs.py:107] 2025-11-17 02:18:37,081 >> Instantiated eval dataset TwoLabelDataset, length 17778, which is file /data/DG_Test_set/test_dataset_Rotate_90deg.npz
+[INFO|training_args.py:1598] 2025-11-17 02:18:37,084 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:1598] 2025-11-17 02:18:37,084 >> No output directory specified, defaulting to 'trainer_output'. To change this behavior, specify --output_dir when creating TrainingArguments.
+[INFO|training_args.py:2222] 2025-11-17 02:18:37,086 >> PyTorch: setting up devices
+[INFO|training_args.py:2222] 2025-11-17 02:18:37,086 >> PyTorch: setting up devices
+[INFO|evaluation_funcs.py:55] 2025-11-17 02:18:37,126 >> TrainingArguments(
+_n_gpu=1,
+accelerator_config={'split_batches': False, 'dispatch_batches': None, 'even_batches': True, 'use_seedable_sampler': True, 'non_blocking': False, 'gradient_accumulation_kwargs': None, 'use_configured_state': False},
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+average_tokens_across_devices=True,
+batch_eval_metrics=False,
+bf16=False,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=False,
+dataloader_prefetch_factor=None,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_do_concat_batches=True,
+eval_on_start=False,
+eval_steps=None,
+eval_strategy=IntervalStrategy.NO,
+eval_use_gather_object=False,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=1,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=None,
+hub_revision=None,
+hub_strategy=HubStrategy.EVERY_SAVE,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_for_metrics=[],
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=no,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=5e-05,
+length_column_name=length,
+liger_kernel_config=None,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=trainer_output/runs/Nov17_02-18-37_b6d575939af8,
+logging_first_step=False,
+logging_nan_inf_filter=True,
+logging_steps=500,
+logging_strategy=IntervalStrategy.STEPS,
+lr_scheduler_kwargs={},
+lr_scheduler_type=SchedulerType.LINEAR,
+max_grad_norm=1.0,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3.0,
+optim=OptimizerNames.ADAMW_TORCH,
+optim_args=None,
+optim_target_modules=None,
+output_dir=trainer_output,
+overwrite_output_dir=False,
+parallelism_config=None,
+past_index=-1,
+per_device_eval_batch_size=32,
+per_device_train_batch_size=8,
+prediction_loss_only=False,
+project=huggingface,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=[],
+restore_callback_states_from_checkpoint=False,
+resume_from_checkpoint=None,
+run_name=None,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=SaveStrategy.STEPS,
+save_total_limit=None,
+seed=42,
+skip_memory_metrics=True,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torch_empty_cache_steps=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+trackio_space_id=trackio,
+use_cpu=False,
+use_legacy_prediction_loop=False,
+use_liger_kernel=False,
+use_mps_device=False,
+warmup_ratio=0.0,
+warmup_steps=0,
+weight_decay=0.0,
+)
+[INFO|trainer.py:4643] 2025-11-17 02:18:37,339 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4643] 2025-11-17 02:18:37,339 >> 
+***** Running Evaluation *****
+[INFO|trainer.py:4645] 2025-11-17 02:18:37,341 >>   Num examples = 17778
+[INFO|trainer.py:4645] 2025-11-17 02:18:37,341 >>   Num examples = 17778
+[INFO|trainer.py:4648] 2025-11-17 02:18:37,343 >>   Batch size = 32
+[INFO|trainer.py:4648] 2025-11-17 02:18:37,343 >>   Batch size = 32
+[INFO|evaluation_funcs.py:69] 2025-11-17 02:24:33,692 >> Metrics: {'eval_loss': 0.6954928636550903, 'eval_model_preparation_time': 0.0052, 'eval_accuracy_branch1': 0.4726065924175948, 'eval_precision_branch1': 0.46397647290305105, 'eval_recall_branch1': 0.44354671961155795, 'eval_f1_branch1': 0.4369311116145181, 'eval_accuracy_branch2': 0.361401732478344, 'eval_precision_branch2': 0.5, 'eval_recall_branch2': 0.180700866239172, 'eval_f1_branch2': 0.265462959137297, 'eval_lambda': 0.0, 'eval_tn_branch2': 0, 'eval_fp_branch2': 0, 'eval_fn_branch2': 11353, 'eval_tp_branch2': 6425, 'eval_loss_branch1': 0.0, 'eval_loss_branch2': 0.6954926252365112, 'eval_cm_branch1_actual0_pred0': 867, 'eval_cm_branch1_actual0_pred1': 1, 'eval_cm_branch1_actual0_pred2': 4, 'eval_cm_branch1_actual0_pred3': 0, 'eval_cm_branch1_actual0_pred4': 43, 'eval_cm_branch1_actual0_pred5': 111, 'eval_cm_branch1_actual0_pred6': 0, 'eval_cm_branch1_actual0_pred7': 0, 'eval_cm_branch1_actual0_pred8': 1, 'eval_cm_branch1_actual0_pred9': 2, 'eval_cm_branch1_actual0_pred10': 7, 'eval_cm_branch1_actual1_pred0': 14, 'eval_cm_branch1_actual1_pred1': 141, 'eval_cm_branch1_actual1_pred2': 522, 'eval_cm_branch1_actual1_pred3': 0, 'eval_cm_branch1_actual1_pred4': 66, 'eval_cm_branch1_actual1_pred5': 41, 'eval_cm_branch1_actual1_pred6': 0, 'eval_cm_branch1_actual1_pred7': 0, 'eval_cm_branch1_actual1_pred8': 0, 'eval_cm_branch1_actual1_pred9': 0, 'eval_cm_branch1_actual1_pred10': 0, 'eval_cm_branch1_actual2_pred0': 7, 'eval_cm_branch1_actual2_pred1': 310, 'eval_cm_branch1_actual2_pred2': 390, 'eval_cm_branch1_actual2_pred3': 0, 'eval_cm_branch1_actual2_pred4': 19, 'eval_cm_branch1_actual2_pred5': 67, 'eval_cm_branch1_actual2_pred6': 0, 'eval_cm_branch1_actual2_pred7': 0, 'eval_cm_branch1_actual2_pred8': 0, 'eval_cm_branch1_actual2_pred9': 0, 'eval_cm_branch1_actual2_pred10': 0, 'eval_cm_branch1_actual3_pred0': 0, 'eval_cm_branch1_actual3_pred1': 0, 'eval_cm_branch1_actual3_pred2': 0, 'eval_cm_branch1_actual3_pred3': 274, 'eval_cm_branch1_actual3_pred4': 13, 'eval_cm_branch1_actual3_pred5': 5, 'eval_cm_branch1_actual3_pred6': 16, 'eval_cm_branch1_actual3_pred7': 261, 'eval_cm_branch1_actual3_pred8': 23, 'eval_cm_branch1_actual3_pred9': 0, 'eval_cm_branch1_actual3_pred10': 193, 'eval_cm_branch1_actual4_pred0': 60, 'eval_cm_branch1_actual4_pred1': 1, 'eval_cm_branch1_actual4_pred2': 49, 'eval_cm_branch1_actual4_pred3': 0, 'eval_cm_branch1_actual4_pred4': 698, 'eval_cm_branch1_actual4_pred5': 1218, 'eval_cm_branch1_actual4_pred6': 0, 'eval_cm_branch1_actual4_pred7': 0, 'eval_cm_branch1_actual4_pred8': 0, 'eval_cm_branch1_actual4_pred9': 31, 'eval_cm_branch1_actual4_pred10': 7, 'eval_cm_branch1_actual5_pred0': 125, 'eval_cm_branch1_actual5_pred1': 12, 'eval_cm_branch1_actual5_pred2': 3, 'eval_cm_branch1_actual5_pred3': 10, 'eval_cm_branch1_actual5_pred4': 806, 'eval_cm_branch1_actual5_pred5': 836, 'eval_cm_branch1_actual5_pred6': 1, 'eval_cm_branch1_actual5_pred7': 2, 'eval_cm_branch1_actual5_pred8': 1, 'eval_cm_branch1_actual5_pred9': 137, 'eval_cm_branch1_actual5_pred10': 32, 'eval_cm_branch1_actual6_pred0': 4, 'eval_cm_branch1_actual6_pred1': 0, 'eval_cm_branch1_actual6_pred2': 0, 'eval_cm_branch1_actual6_pred3': 70, 'eval_cm_branch1_actual6_pred4': 0, 'eval_cm_branch1_actual6_pred5': 0, 'eval_cm_branch1_actual6_pred6': 2564, 'eval_cm_branch1_actual6_pred7': 388, 'eval_cm_branch1_actual6_pred8': 33, 'eval_cm_branch1_actual6_pred9': 31, 'eval_cm_branch1_actual6_pred10': 195, 'eval_cm_branch1_actual7_pred0': 0, 'eval_cm_branch1_actual7_pred1': 0, 'eval_cm_branch1_actual7_pred2': 0, 'eval_cm_branch1_actual7_pred3': 119, 'eval_cm_branch1_actual7_pred4': 0, 'eval_cm_branch1_actual7_pred5': 0, 'eval_cm_branch1_actual7_pred6': 148, 'eval_cm_branch1_actual7_pred7': 857, 'eval_cm_branch1_actual7_pred8': 614, 'eval_cm_branch1_actual7_pred9': 0, 'eval_cm_branch1_actual7_pred10': 9, 'eval_cm_branch1_actual8_pred0': 0, 'eval_cm_branch1_actual8_pred1': 0, 'eval_cm_branch1_actual8_pred2': 0, 'eval_cm_branch1_actual8_pred3': 49, 'eval_cm_branch1_actual8_pred4': 0, 'eval_cm_branch1_actual8_pred5': 0, 'eval_cm_branch1_actual8_pred6': 323, 'eval_cm_branch1_actual8_pred7': 417, 'eval_cm_branch1_actual8_pred8': 1024, 'eval_cm_branch1_actual8_pred9': 0, 'eval_cm_branch1_actual8_pred10': 0, 'eval_cm_branch1_actual9_pred0': 207, 'eval_cm_branch1_actual9_pred1': 0, 'eval_cm_branch1_actual9_pred2': 0, 'eval_cm_branch1_actual9_pred3': 0, 'eval_cm_branch1_actual9_pred4': 615, 'eval_cm_branch1_actual9_pred5': 336, 'eval_cm_branch1_actual9_pred6': 36, 'eval_cm_branch1_actual9_pred7': 0, 'eval_cm_branch1_actual9_pred8': 0, 'eval_cm_branch1_actual9_pred9': 272, 'eval_cm_branch1_actual9_pred10': 156, 'eval_cm_branch1_actual10_pred0': 104, 'eval_cm_branch1_actual10_pred1': 1, 'eval_cm_branch1_actual10_pred2': 1, 'eval_cm_branch1_actual10_pred3': 65, 'eval_cm_branch1_actual10_pred4': 115, 'eval_cm_branch1_actual10_pred5': 812, 'eval_cm_branch1_actual10_pred6': 187, 'eval_cm_branch1_actual10_pred7': 15, 'eval_cm_branch1_actual10_pred8': 48, 'eval_cm_branch1_actual10_pred9': 57, 'eval_cm_branch1_actual10_pred10': 479, 'eval_runtime': 356.3486, 'eval_samples_per_second': 49.889, 'eval_steps_per_second': 1.56}
