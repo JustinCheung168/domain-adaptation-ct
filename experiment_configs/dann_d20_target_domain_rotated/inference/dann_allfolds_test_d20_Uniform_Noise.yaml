@@ -6,7 +6,7 @@ checkpoint_dirs:
     - /data/D20_CV_V2/linear_increasing_lambda_scheduler_fold_2_2025-11-12_06-27-25/model.safetensors
     - /data/D20_CV_V2/linear_increasing_lambda_scheduler_fold_3_2025-11-12_09-09-04/model.safetensors
     - /data/D20_CV_V2/linear_increasing_lambda_scheduler_fold_4_2025-11-12_11-50-39/model.safetensors
-output_dir: /repo/results/metrics/final_results/dann_target_domain_Rotated_90deg/Uniform_Noise/
+output_dir: /repo/results/metrics/final_results/dann_target_domain_Rotate_90deg/Uniform_Noise/
 architecture:
     # This directory is expected to contain `model.safetensors` at minimum.
     # This directory would have been produced by using `run_training.py`.
