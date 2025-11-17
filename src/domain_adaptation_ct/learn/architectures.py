@@ -68,10 +68,28 @@ class ResNet50Baseline(PreTrainedModel):
             loss2 = None,
         )
 
+    def get_branch1_logits_func(self):
+        """"""
+        def model_forward_func(input_tensor: torch.Tensor):
+            outputs = self(input_tensor)
+            return outputs.branch1_logits
+        return model_forward_func
+
     @classmethod
-    def load(cls, file_path: str):
-        """In theory should be able to load from checkpoint or safetensors formats"""
-        raise NotImplementedError(":)")
+    def load(cls, file_path: str, num_classes: int):
+        """Load from model.safetensors file"""
+        # Load safetensors weights
+        state_dict = load_file(file_path)
+
+        # Rebuild model and load weights.
+        # TODO - figure out a better way to ensure the parameters used in the original construction make it here.
+        model = ResNet50Baseline(num_classes=num_classes)
+        model.load_state_dict(state_dict)
+
+        # Put into eval mode by default. The Trainer should manage the state if you are going to continue training from here.
+        model.eval()
+
+        return model
 
 class ResNet50DANN(ResNet50Baseline):
     """
@@ -117,11 +135,19 @@ class ResNet50DANN(ResNet50Baseline):
         loss1 = None
         loss2 = None
         if (labels1 is not None) and (labels2 is not None):
-            loss, loss1, loss2 = self.loss_fn(logits1, logits2, labels1, labels2.view(-1, 1), self.ld_scale)
+            # Freeze gradients BEFORE loss computation
+            target_domain_mask = labels2.view(-1, 1).bool()
+            logits1_masked = torch.where(
+                target_domain_mask,
+                logits1.detach(),  # No gradient for target domain
+                logits1            # Keep gradient for source domain
+            )
+
+            loss, loss1, loss2 = self.loss_fn(logits1_masked, logits2, labels1, labels2.view(-1, 1), self.ld_scale)
 
         return BranchedOutput(
             loss = loss,
-            branch1_logits = logits1,
+            branch1_logits = logits1_masked,
             branch2_logits = logits2,
             loss1 = loss1,
             loss2 = loss2,

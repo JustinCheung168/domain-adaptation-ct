@@ -1,6 +1,6 @@
 import torch
 
-class InstanceWeightedCrossEntropyLoss(torch.nn.Module):
+class InstanceWeightedCrossEntropyLoss(torch.nn.Module): # Old loss version
     """
     Minibatch loss function where the contribution of each instance to the overall loss can be given a weight.
     """
@@ -22,6 +22,17 @@ class InstanceWeightedCrossEntropyLoss(torch.nn.Module):
         Returns:
             Shape []. Loss value.
         """
+        loss = self.base_loss(logits, labels)
+        masked_loss = loss * instance_weights
+        reduced_loss = masked_loss.mean()
+        return reduced_loss
+
+class InstanceWeightedCrossEntropyLoss_new(torch.nn.Module): # New loss version
+    def __init__(self):
+        super().__init__()
+        self.base_loss = torch.nn.CrossEntropyLoss(reduction='none')
+ 
+    def forward(self, logits, labels, instance_weights):
         active_mask = instance_weights > 0
         if active_mask.sum() == 0:
             return torch.tensor(0.0, device=logits.device)
