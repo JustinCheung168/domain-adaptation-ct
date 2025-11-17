@@ -1,0 +1,28 @@
+---
+# Paths to the checkpoint-xyz/ directory containing the checkpoint to load the model and any other products of training from.
+checkpoint_dirs:
+    - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_0_2025-11-11_04-01-11/model.safetensors
+    - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_1_2025-11-11_06-44-35/model.safetensors
+    - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_2_2025-11-11_09-26-56/model.safetensors
+    - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_3_2025-11-11_12-08-36/model.safetensors
+    - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_4_2025-11-11_14-50-27/model.safetensors
+output_dir: /data/dann_final_results/D21/Rotate_90deg/
+architecture:
+    # This directory is expected to contain `model.safetensors` at minimum.
+    # This directory would have been produced by using `run_training.py`.
+    cls_name: ResNet50DANN
+    cls_init_args:
+        num_classes: 11
+        # Irrelevant to evaluation, but must be provided to instantiate the model object.
+        lamb_initial: 0.0
+        ld_scale: 1.0
+evaluation:
+    evaluator:
+        cls_name: DANNTrainer
+    dataset:
+        cls_name: TwoLabelDataset
+        convert_grayscale_to_rgb: True
+        fold_file_paths:
+            - /data/DG_Test_set/test_dataset_Rotate_90deg.npz
+    evaluation_arguments:
+        batch_size: 32

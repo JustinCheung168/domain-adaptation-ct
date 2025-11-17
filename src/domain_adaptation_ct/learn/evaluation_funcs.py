@@ -29,7 +29,7 @@ def evaluate_model(
 
     # Unique identifier for this run
     date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    run_id_str = f"evaluation_{fold_num}_{date_str}"
+    run_id_str = f"evaluation_fold{fold_num}_{date_str}"
 
     # Decide where to put results for this evaluation run.
     run_output_dir = os.path.join(output_dir, run_id_str)

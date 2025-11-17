@@ -6,7 +6,7 @@ checkpoint_dirs:
     - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_2_2025-11-11_09-26-56/model.safetensors
     - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_3_2025-11-11_12-08-36/model.safetensors
     - /data/D21_CV_V2/linear_increasing_lambda_scheduler_fold_4_2025-11-11_14-50-27/model.safetensors
-output_dir: /data/dann_test_d21_final_results/
+output_dir: /data/dann_final_results/D21/ring_data/
 architecture:
     # This directory is expected to contain `model.safetensors` at minimum.
     # This directory would have been produced by using `run_training.py`.
@@ -23,9 +23,6 @@ evaluation:
         cls_name: TwoLabelDataset
         convert_grayscale_to_rgb: True
         fold_file_paths:
-            - /data/DG_Test_set/test_dataset_original.npz
-            - /data/DG_Test_set/test_dataset_Uniform_Noise.npz
-            - /data/DG_Test_set/test_dataset_Rotate_90deg.npz
             - /data/DG_Test_set/test_dataset_ring_data.npz
     evaluation_arguments:
         batch_size: 32
