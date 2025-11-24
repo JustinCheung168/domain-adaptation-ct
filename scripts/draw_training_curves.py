@@ -5,13 +5,15 @@ from typing import Optional
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
-def plot_loss_curves(csv_paths: list[str], output_dir: str, subplot_titles: Optional[list[str]] = None):
+def plot_loss_curves(csv_paths: list[list[str]], output_dir: str, subplot_titles: Optional[list[str]] = None):
     """
     Plots training and validation loss curves for multiple CSV files.
-    
+    If multiple CSVs are provided, the mean and standard deviation are plotted.
+
     Parameters:
-        csv_paths: List of CSV file paths.
+        csv_paths: List of grouped CSV file paths (each group is a list of paths).
         output_dir: Directory to write loss curves figure to.
         subplot_titles: List of subplot titles.
     """    
@@ -23,23 +25,36 @@ def plot_loss_curves(csv_paths: list[str], output_dir: str, subplot_titles: Opti
     if num_subplots == 1: # axes is not iterable if num_subplots==1
         axes = [axes]
 
-    for i, (csv_path, ax) in enumerate(zip(csv_paths, axes)):
-        df = pd.read_csv(csv_path)
-        print(df)
-        epochs = df['epoch']
-        train_loss = df['train_loss']
-        eval_loss = df['eval_loss']
-        ax.plot(epochs, train_loss, color="blue", label="Training Loss")
-        ax.plot(epochs, eval_loss, color="orange", label="Validation Loss")
+    for i, (group, ax) in enumerate(zip(csv_paths, axes)):
+        dfs = [pd.read_csv(path) for path in group]
+        epochs = dfs[0]['epoch']
+
+        train_losses = np.array([df['train_loss'] for df in dfs])
+        eval_losses = np.array([df['eval_loss'] for df in dfs])
+
+        train_loss_mean = train_losses.mean(axis=0)
+        train_loss_std = train_losses.std(axis=0)
+        eval_loss_mean = eval_losses.mean(axis=0)
+        eval_loss_std = eval_losses.std(axis=0)
+
+        ax.plot(epochs, train_loss_mean, color="blue", label="Training Loss (Mean)")
+        ax.fill_between(epochs, train_loss_mean - train_loss_std, train_loss_mean + train_loss_std, color="blue", alpha=0.2, label="Training Loss (Std Dev)")
+
+        ax.plot(epochs, eval_loss_mean, color="orange", label="Validation Loss (Mean)")
+        ax.fill_between(epochs, eval_loss_mean - eval_loss_std, eval_loss_mean + eval_loss_std, color="orange", alpha=0.2, label="Validation Loss (Std Dev)")
+
         if subplot_titles is not None:
             ax.set_title(subplot_titles[i], fontsize=FONTSIZE)
         ax.set_xlabel("Epoch #", fontsize=FONTSIZE)
         ax.set_ylabel("Loss", fontsize=FONTSIZE)
         _, ymax = ax.get_ylim()
         ax.set_yticks([0.0, round(ymax/2, 1), round(ymax, 1)])
-        ax.legend()
 
-    fig.suptitle("Training and Validation Loss over Epochs", y=1.02, fontsize=FONTSIZE)
+    # Add a single legend for the entire figure
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc='lower center', bbox_to_anchor=(0.5, -0.25), ncol=2, fontsize=FONTSIZE)
+
+    fig.suptitle("Training and Validation Loss over Epochs", y=1.05, fontsize=FONTSIZE)
     plt.rcParams["xtick.labelsize"] = FONTSIZE
     plt.rcParams["ytick.labelsize"] = FONTSIZE
 
@@ -51,7 +66,14 @@ def draw_training_curves(csv_paths: list[str], output_dir: str, subplot_titles: 
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
-    plot_loss_curves(csv_paths, output_dir, subplot_titles)
+    # For k-fold handling of 2 experiments
+    if (len(csv_paths) % 2 == 0) and (len(csv_paths) > 2):
+        k = len(csv_paths) // 2
+        print(f"Detected {k} folds to pair up")
+        plot_loss_curves([[csv_paths[i] for i in range(k)], [csv_paths[i] for i in range(k,2*k)]], output_dir, subplot_titles)
+    else:
+        print(f"Treating each input csv individually")
+        plot_loss_curves([[csv_path] for csv_path in csv_paths], output_dir, subplot_titles)
 
     # There's no support to do this for each CSV path yet
     df = pd.read_csv(csv_paths[0])

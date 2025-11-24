@@ -109,12 +109,11 @@ MSYS_NO_PATHCONV=1 winpty docker run \
 ./scripts/run_evaluation.py experiment_configs/dann_test_quickcheck_config.yaml
 ```
 
+You can generate the loss curves from the training_curves CSV files produced by training (using our two 5-fold experiments as an example):
+```bash
+python3 scripts/draw_training_curves.py results/logs/dann_training_curves/D20_fold0.csv results/logs/dann_training_curves/D20_fold1.csv results/logs/dann_training_curves/D20_fold2.csv results/logs/dann_training_curves/D20_fold3.csv results/logs/dann_training_curves/D20_fold4.csv results/logs/dann_training_curves/D21_fold0.csv results/logs/dann_training_curves/D21_fold1.csv results/logs/dann_training_curves/D21_fold2.csv results/logs/dann_training_curves/D21_fold3.csv results/logs/dann_training_curves/D21_fold4.csv results/figs/training_curves --subplot_titles "DANN (\$\mathcal{S}=\$Original, \$\mathcal{T}=\$Rotated 90\$\degree\$)" "DANN (\$\mathcal{S}=\$Original, \$\mathcal{T}=\$Ring Artifact)"
+```
+
 ## Citation
 
 Cheung, J., Savine, S., Nguyen, C., Lu, L., & Yasin, A. S. (2025). Improving Artifact Robustness for CT Deep Learning Models Without Labeled Artifact Images via Domain Adaptation. arXiv preprint arXiv:2510.06584.
-
-## TODO
-
-Restore the image manipulation notebooks.
-Restore the OrganAMNIST preprocessing code.
-Update this documentation.
